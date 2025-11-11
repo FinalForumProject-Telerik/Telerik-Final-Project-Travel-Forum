@@ -64,4 +64,5 @@ public class PostsRestController {
         }
     }
     //toDo like other peoples Posts
+    //toDo search Posts by title, content, author by Admin
 }

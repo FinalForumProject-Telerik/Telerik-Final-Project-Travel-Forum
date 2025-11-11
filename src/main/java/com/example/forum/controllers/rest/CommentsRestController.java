@@ -40,11 +40,8 @@ public class CommentsRestController {
         try {
             return commentMapper.toDto(commentsService.addCommentToPost(postId, comment));
         } catch (EntityNotFoundException e) {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
-        }
-    }
 
-    @GetMapping("/comments/{commentId}")
+        }
     public CommentDto getCommentById(@PathVariable int commentId) {
         //toDo authentication
         try {
