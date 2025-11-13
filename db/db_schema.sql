@@ -29,9 +29,7 @@ create table users
     constraint check_size_last_name
         check (char_length(`last_name` between 4 and 32)),
     constraint check_size_username
-        check (char_length(`username` between 4 and 32)),
-    constraint check_valid_email
-        check (`email` regexp '^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$')
+        check (char_length(`username` between 4 and 32))
 );
 
 create table posts
