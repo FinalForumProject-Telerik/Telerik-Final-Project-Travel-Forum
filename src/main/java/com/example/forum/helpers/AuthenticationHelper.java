@@ -1,9 +1,10 @@
 package com.example.forum.helpers;
 
-import com.company.web.springdemo.exceptions.AuthorizationException;
-import com.company.web.springdemo.exceptions.EntityNotFoundException;
-import com.company.web.springdemo.models.User;
-import com.company.web.springdemo.services.UserService;
+
+import com.example.forum.exceptions.AuthorizationException;
+import com.example.forum.exceptions.EntityNotFoundException;
+import com.example.forum.models.User;
+import com.example.forum.services.UserService;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -28,9 +29,9 @@ public class AuthenticationHelper {
 
         try {
             String userInfo = headers.getFirst(AUTHORIZATION_HEADER_NAME);
-            String username = getUsername(userInfo);
+            String userEmail = getUserEmail(userInfo);
             String password = getPassword(userInfo);
-            User user = userService.get(username);
+            User user = userService.get(userEmail);
 
             if (!user.getPassword().equals(password)) {
                 throw new AuthorizationException(INVALID_AUTHENTICATION_ERROR);
@@ -42,7 +43,7 @@ public class AuthenticationHelper {
         }
     }
 
-    private String getUsername(String userInfo) {
+    private String getUserEmail(String userInfo) {
         int firstSpace = userInfo.indexOf(" ");
         if (firstSpace == -1) {
             throw new AuthorizationException(INVALID_AUTHENTICATION_ERROR);

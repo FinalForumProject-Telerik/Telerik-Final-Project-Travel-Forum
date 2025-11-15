@@ -1,8 +1,10 @@
 package com.example.forum.services;
 
+import com.example.forum.exceptions.AuthorizationException;
 import com.example.forum.exceptions.EntityNotFoundException;
 import com.example.forum.models.Comment;
 import com.example.forum.models.Post;
+import com.example.forum.models.User;
 import com.example.forum.repositories.CommentRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -56,9 +58,13 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     @Transactional
-    public Comment updateComment(int commentId, Comment comment) {
-        //toDo authorization
+    public Comment updateComment(int commentId, Comment comment, User user) {
+
+
         Comment commentCurrent = commentRepository.getCommentById(commentId);
+        if (!user.isAdmin() && !user.equals(commentCurrent.getUser())){
+            throw new AuthorizationException("Not authorized");
+        }
         commentCurrent.setContent(comment.getContent());
         return commentRepository.save(comment);
 
@@ -66,9 +72,12 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     @Transactional
-    public void deleteComment(int commentId) {
-        //toDo authorizatrion
+    public void deleteComment(int commentId, User user) {
+
         Comment commentCurrent = commentRepository.getCommentById(commentId);
+        if (!user.isAdmin() && !user.equals(commentCurrent.getUser())){
+            throw new AuthorizationException("Not authorized");
+        }
         Post post = commentCurrent.getPost();
         if (post != null) {
             post.getComments().remove(commentCurrent);
