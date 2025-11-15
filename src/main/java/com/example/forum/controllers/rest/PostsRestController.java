@@ -1,11 +1,15 @@
 package com.example.forum.controllers.rest;
 
+import com.example.forum.exceptions.AuthorizationException;
 import com.example.forum.exceptions.EntityNotFoundException;
 import com.example.forum.helpers.AuthenticationHelper;
 import com.example.forum.helpers.PostMapper;
+import com.example.forum.models.Post;
+import com.example.forum.models.User;
 import com.example.forum.models.dto.PostDto;
 import com.example.forum.services.PostService;
 import jakarta.validation.Valid;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -40,31 +44,41 @@ public class PostsRestController {
         }
     }
     @PostMapping
-    public PostDto createPost(@Valid @RequestBody PostDto postDto) {
-        //toDo authentication
+    public PostDto createPost(@Valid @RequestBody PostDto postDto, @RequestHeader HttpHeaders headers) {
+        try {
+            User user = authenticationHelper.tryGetUser(headers);
+        }catch (AuthorizationException e){
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
+        }
         Post post = postMapper.fromDto(postDto);
         return postMapper.toDto(postsService.createPost(post));
 
     }
     @PutMapping("/{id}")
-    public PostDto updatePost(@PathVariable int id, @Valid @RequestBody PostDto postDto) {
-        //toDo authentication
+    public PostDto updatePost(@PathVariable int id, @Valid @RequestBody PostDto postDto, @RequestHeader HttpHeaders headers) {
+
         //toDo authorization only own posts
         Post post = postMapper.fromDto(postDto);
         try {
-            return postMapper.toDto(postsService.updatePost(id, post));
+            User user = authenticationHelper.tryGetUser(headers);
+            return postMapper.toDto(postsService.updatePost(id, post, user));
         } catch (EntityNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        }catch (AuthorizationException e){
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
     }
     @DeleteMapping("/{id}")
-    public void deletePost(@PathVariable int id) {
-        //toDo authentication
+    public void deletePost(@PathVariable int id, @RequestHeader HttpHeaders headers) {
+
         //toDo authorization only own posts
         try {
-            postsService.deletePost(id);
+            User user = authenticationHelper.tryGetUser(headers);
+            postsService.deletePost(id, user);
         } catch (EntityNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        }catch (AuthorizationException e){
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
     }
     //toDo like other peoples Posts
