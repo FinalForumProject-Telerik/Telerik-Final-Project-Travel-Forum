@@ -22,6 +22,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @Transactional
     public List<Comment> getCommentsByPostId(int postId) {
        Post post  = postService.getPostById(postId);
 
@@ -40,13 +41,15 @@ public class CommentServiceImpl implements CommentService {
         comment.setPost(post);
 
         Comment saved = commentRepository.save(comment);
-        post.addComment(comment);
+        post.getComments().remove(comment);
+        post.getComments().add(saved);
 
         return saved;
 
     }
 
     @Override
+    @Transactional
     public Comment getCommentById(int commentId) {
         return commentRepository.getCommentById(commentId);
     }
@@ -62,12 +65,13 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    @Transactional
     public void deleteComment(int commentId) {
         //toDo authorizatrion
         Comment commentCurrent = commentRepository.getCommentById(commentId);
         Post post = commentCurrent.getPost();
         if (post != null) {
-            post.getComments().remove(existing);
+            post.getComments().remove(commentCurrent);
         }
         commentRepository.deleteById(commentId);
 

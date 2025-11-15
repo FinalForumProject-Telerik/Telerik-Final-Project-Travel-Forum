@@ -7,7 +7,6 @@ public interface CommentRepository {
 
     Comment getCommentById(int commentId);
 
-    Comment save(Comment comment);
 
 
 
