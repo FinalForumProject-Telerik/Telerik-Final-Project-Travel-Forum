@@ -3,7 +3,10 @@ package com.example.forum.controllers.rest;
 import com.example.forum.exceptions.EntityDuplicateException;
 import com.example.forum.helpers.AuthenticationHelper;
 import com.example.forum.helpers.UserMapper;
+import com.example.forum.models.User;
 import com.example.forum.models.dto.UserDto;
+import com.example.forum.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -13,12 +16,12 @@ import java.util.List;
 @RestController
 @RequestMapping("api/users")
 public class UserRestController {
-    private final UsersService usersService;
+    private final UserService usersService;
     private final AuthenticationHelper authenticationHelper;
     private final UserMapper userMapper;
 
 
-    public UserRestController(UsersService usersService, AuthenticationHelper authenticationHelper, UserMapper userMapper) {
+    public UserRestController(UserService usersService, AuthenticationHelper authenticationHelper, UserMapper userMapper) {
         this.usersService = usersService;
         this.authenticationHelper = authenticationHelper;
         this.userMapper = userMapper;

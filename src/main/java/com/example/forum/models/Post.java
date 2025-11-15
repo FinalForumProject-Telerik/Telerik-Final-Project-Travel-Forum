@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -32,8 +33,8 @@ public class Post {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Comment> comments;
+    @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Comment> comments = new HashSet<>();
 
     @Column(name = "likes", nullable = false)
     private int likes = 0;
@@ -91,6 +92,19 @@ public class Post {
     public int getLikes() {
         return likes;
     }
+    public void addComment(Comment comment){
+        if (comment == null){
+            return;
+        }
+        comment.setPost(this);
+        comments.add(comment);
+    }
+    public void removeComment(Comment comment) {
+        if (comment == null) return;
+        comments.remove(comment);
+        comment.setPost(null);
+    }
+
 
     public void setLikes(int likes) {
         this.likes = likes;

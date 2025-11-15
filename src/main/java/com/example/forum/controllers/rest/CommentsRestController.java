@@ -3,7 +3,9 @@ package com.example.forum.controllers.rest;
 import com.example.forum.exceptions.EntityNotFoundException;
 import com.example.forum.helpers.AuthenticationHelper;
 import com.example.forum.helpers.CommentMapper;
+import com.example.forum.models.Comment;
 import com.example.forum.models.dto.CommentDto;
+import com.example.forum.services.CommentService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,11 +16,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class CommentsRestController {
-    private final CommentsService commentsService;
+    private final CommentService commentsService;
     private final AuthenticationHelper authenticationHelper;
     private final CommentMapper commentMapper;
 
-    public CommentsRestController(CommentsService commentsService, AuthenticationHelper authenticationHelper, CommentMapper commentMapper) {
+    public CommentsRestController(CommentService commentsService, AuthenticationHelper authenticationHelper, CommentMapper commentMapper) {
         this.commentsService = commentsService;
         this.authenticationHelper = authenticationHelper;
         this.commentMapper = commentMapper;

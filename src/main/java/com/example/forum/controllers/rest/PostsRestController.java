@@ -4,6 +4,7 @@ import com.example.forum.exceptions.EntityNotFoundException;
 import com.example.forum.helpers.AuthenticationHelper;
 import com.example.forum.helpers.PostMapper;
 import com.example.forum.models.dto.PostDto;
+import com.example.forum.services.PostService;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -14,11 +15,11 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/posts")
 public class PostsRestController {
-    private final PostsService postsService;
+    private final PostService postsService;
     private final AuthenticationHelper authenticationHelper;
     private final PostMapper postMapper;
 
-    public PostsRestController(PostsService postsService, AuthenticationHelper authenticationHelper, PostMapper postMapper) {
+    public PostsRestController(PostService postsService, AuthenticationHelper authenticationHelper, PostMapper postMapper) {
         this.postsService = postsService;
         this.authenticationHelper = authenticationHelper;
         this.postMapper = postMapper;
