@@ -43,6 +43,12 @@ public class User {
     @Column(name = "is_admin")
     private boolean isAdmin;
 
+    @Column(name = "is_blocked")
+    private boolean isBlocked;
+
+    @Column(name = "profile_photo")
+    private String profilePhoto;
+
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<Post> posts;
 
