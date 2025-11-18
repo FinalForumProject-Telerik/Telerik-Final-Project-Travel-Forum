@@ -15,4 +15,6 @@ public interface UserRepository {
     void create (User user);
 
     void update (User user);
+
+    List<User> search(String username, String email, String firstName, User requester);
 }

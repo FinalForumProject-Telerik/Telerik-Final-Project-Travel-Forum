@@ -121,6 +121,10 @@ public class User {
         isAdmin = admin;
     }
 
+    public void setBlocked(boolean blocked) {
+        isBlocked = blocked;
+    }
+
     public Set<Post> getPosts() {
         return posts;
     }

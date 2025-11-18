@@ -69,4 +69,9 @@ public class AuthenticationHelper {
 
     }
 
+    public void requireAdmin(User requester) throws AuthorizationException {
+        if (requester == null || !Boolean.TRUE.equals(requester.isAdmin())) {
+            throw new AuthorizationException("User is not authorized to perform this action.");
+        }
+    }
 }

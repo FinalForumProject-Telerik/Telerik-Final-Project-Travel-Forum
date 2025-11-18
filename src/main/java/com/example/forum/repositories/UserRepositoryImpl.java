@@ -71,4 +71,9 @@ public class UserRepositoryImpl implements UserRepository {
             session.getTransaction().commit();
         }
     }
+    //toDo
+    @Override
+    public List<User> search(String username, String email, String firstName, User requester) {
+        return List.of();
+    }
 }

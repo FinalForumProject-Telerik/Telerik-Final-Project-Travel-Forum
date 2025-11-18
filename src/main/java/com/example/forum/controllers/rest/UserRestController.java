@@ -99,7 +99,7 @@ public class UserRestController {
         //toDo authorization admin only
         try {
             User user = authenticationHelper.tryGetUser(headers);
-            return usersService.get(id, user);
+            return usersService.get(id);
         } catch (EntityNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }catch (AuthorizationException e){

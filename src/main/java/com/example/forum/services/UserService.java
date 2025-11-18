@@ -1,6 +1,7 @@
 package com.example.forum.services;
 
 import com.example.forum.models.User;
+import com.example.forum.models.dto.UserDto;
 
 import java.util.List;
 
@@ -10,10 +11,19 @@ public interface UserService {
 
     User get(int id);
 
-    //Possible solution for AuthHelpers
-    //User get(String email);
+    User getByEmail(String email);
 
-    User get (String username);
+    User getByUsername (String username);
 
     void create (User user);
+
+    void blockUser(int id, User requester);
+
+    void unblockUser(int id, User requester);
+
+    List<UserDto> getUsers();
+
+    UserDto getUserDto(int id);
+
+    List<UserDto> searchUsers(String username, String email, String firstName, User requester);
 }
