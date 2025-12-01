@@ -40,7 +40,10 @@ public class CommentServiceImpl implements CommentService {
 
     @Override
     @Transactional
-    public Comment addCommentToPost(int postId, Comment comment) {
+    public Comment addCommentToPost(int postId, Comment comment, User user) {
+        if (user.isBlocked()){
+            throw new AuthorizationException("Blocked users cannot add comments");
+        }
 
         Post post  = postService.getPostById(postId);
         comment.setPost(post);

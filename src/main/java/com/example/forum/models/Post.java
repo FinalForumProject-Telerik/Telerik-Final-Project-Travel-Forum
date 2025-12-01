@@ -34,6 +34,7 @@ public class Post {
     private User user;
 
     @OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OrderBy("createdAt DESC")
     private Set<Comment> comments = new HashSet<>();
 
     @Column(name = "likes", nullable = false)

@@ -52,7 +52,7 @@ public class CommentsRestController {
         try {
             User user = authenticationHelper.tryGetUser(headers);
             comment.setUser(user);
-            return commentMapper.toDto(commentsService.addCommentToPost(postId, comment));
+            return commentMapper.toDto(commentsService.addCommentToPost(postId, comment, user));
         } catch (EntityNotFoundException e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }catch (AuthorizationException e){
