@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/PageLayout.html :: head('Edit Post')}"></head>
+<body>
+<header th:replace="~{fragments/PageLayout.html :: header}"></header>
+
+<div class="body-content">
+    <h2>Edit Post</h2>
+
+    <form th:action="@{/posts/{id}/edit(id=${post.id})}" th:object="${post}" method="post">
+        <input type="hidden" th:field="*{id}" />
+
+        <label for="title">Title:</label>
+        <br/>
+        <input id="title" type="text" th:field="*{title}" size="60" />
+        <label class="error" th:errors="*{title}">Title error</label>
+        <br/><br/>
+
+        <label for="content">Content:</label>
+        <br/>
+        <textarea id="content" th:field="*{content}" rows="10" cols="60"></textarea>
+        <label class="error" th:errors="*{content}">Content error</label>
+        <br/><br/>
+
+        <input type="submit" value="Update Post"/>
+        <a th:href="@{/posts/{id}(id=${post.id})}" style="margin-left: 10px;">
+            <button type="button">Cancel</button>
+        </a>
+    </form>
+
+    <hr>
+
+</div>
+
+<footer th:replace="~{fragments/PageLayout.html :: footer}"></footer>
+</body>
+</html>

@@ -10,17 +10,23 @@
         <p class="margin12" th:text="#{post.content} + ': ' +      ${post.content}">Content</p>
         <p class="margin12" th:text="#{post.created-by}  + ': ' + ${post.user.username}">Username</p>
     </div>
+
+    <!-- Edit Post button - only visible to post creator-->
+    <div th:if="${currentUser != null and (currentUser.id == post.user.id)}">
+        <a th:href="@{/posts/{id}/edit(id=${post.id})}">
+            <button type="button">Edit Post</button>
+        </a>
+    </div>
+
     <div id="comment-input" th:if="${session.currentUser != null}">
         <h3 th:text="#{comments.title}">Add a comment</h3>
         <form th:action="@{/posts/{id}/comment(id=${post.id})}" th:object="${comment}" method="post">
-            <!-- CSRF token if Spring Security is enabled -->
-            <input type="hidden" th:if="${_csrf != null}" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
-
             <br>
                 <textarea th:field="*{content}" placeholder="Enter your comment here" rows="3"></textarea>
             <br>
             <input type="submit" th:value="#{comments.submit}"/>
             <label class="label-error" th:if="${#fields.hasErrors('content')}" th:errors="*{content}">Error placeholder</label>
+        </form>
     </div>
 
 <!--    Below can be made to delete or update post to be used only by admins-->

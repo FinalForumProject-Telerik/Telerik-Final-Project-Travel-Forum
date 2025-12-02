@@ -6,6 +6,8 @@ import jakarta.validation.constraints.Size;
 
 public class PostDto {
 
+    private Integer id;
+
     // validation for userId might not be needed as it would be added from session but might be
     //added if needed
     private Integer userId;
@@ -19,6 +21,14 @@ public class PostDto {
     private String content;
 
     public PostDto() {
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
     }
 
     public Integer getUserId() {

@@ -9,6 +9,7 @@ public class PostMapper {
 
     public PostDto toDto(Post post) {
         PostDto dto = new PostDto();
+        dto.setId(post.getId());
         dto.setUserId(post.getUser() != null ? post.getUser().getId() : null);
         dto.setTitle(post.getTitle());
         dto.setContent(post.getContent());
@@ -17,6 +18,7 @@ public class PostMapper {
 
     public Post fromDto(PostDto dto) {
         Post post = new Post();
+        post.setId(dto.getId());
         post.setTitle(dto.getTitle());
         post.setContent(dto.getContent());
         // User will be set by the service/controller layer

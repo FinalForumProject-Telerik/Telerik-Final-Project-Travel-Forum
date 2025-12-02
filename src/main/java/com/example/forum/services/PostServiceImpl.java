@@ -49,7 +49,10 @@ public class PostServiceImpl implements PostService {
             throw new AuthorizationException("Only the creator or admin can update this post.");
         }
 
-        postRepository.updatePost(post);
+        existingPost.setTitle(post.getTitle());
+        existingPost.setContent(post.getContent());
+
+        postRepository.updatePost(existingPost);
     }
 
     @Override
