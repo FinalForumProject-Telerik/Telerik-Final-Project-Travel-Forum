@@ -63,10 +63,10 @@ public class PostMvcController {
             return "redirect:/auth/login";
         }
         if (bindingResult.hasErrors()) {
-
             try {
-                Post post = postService.getPostById(id);
+                Post post = postService.getPostByIdWithComments(id);
                 model.addAttribute("post", post);
+                model.addAttribute("comment", commentDto);
             } catch (EntityNotFoundException e) {
                 model.addAttribute("statusCode", HttpStatus.NOT_FOUND.getReasonPhrase());
                 model.addAttribute("error", e.getMessage());

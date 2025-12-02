@@ -47,13 +47,9 @@ public class CommentServiceImpl implements CommentService {
 
         Post post  = postService.getPostById(postId);
         comment.setPost(post);
+        comment.setUser(user);
 
-        Comment saved = commentRepository.save(comment);
-        post.getComments().remove(comment);
-        post.getComments().add(saved);
-
-        return saved;
-
+        return commentRepository.save(comment);
     }
 
     @Override
@@ -65,15 +61,12 @@ public class CommentServiceImpl implements CommentService {
     @Override
     @Transactional
     public Comment updateComment(int commentId, Comment comment, User user) {
-
-
         Comment commentCurrent = commentRepository.getCommentById(commentId);
         if (!user.isAdmin() && !user.equals(commentCurrent.getUser())){
             throw new AuthorizationException("Not authorized");
         }
         commentCurrent.setContent(comment.getContent());
-        return commentRepository.save(comment);
-
+        return commentRepository.save(commentCurrent);
     }
 
     @Override
@@ -83,10 +76,6 @@ public class CommentServiceImpl implements CommentService {
         Comment commentCurrent = commentRepository.getCommentById(commentId);
         if (!user.isAdmin() && !user.equals(commentCurrent.getUser())){
             throw new AuthorizationException("Not authorized");
-        }
-        Post post = commentCurrent.getPost();
-        if (post != null) {
-            post.getComments().remove(commentCurrent);
         }
         commentRepository.deleteById(commentId);
 
