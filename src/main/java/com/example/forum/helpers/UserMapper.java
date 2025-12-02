@@ -18,6 +18,17 @@ public class UserMapper {
         return user;
     }
 
+    public User fromDto(RegisterDto registerDto) {
+        if (registerDto == null) return null;
+        User user = new User();
+        user.setUsername(registerDto.getUsername());
+        user.setPassword(registerDto.getPassword());
+        user.setFirstName(registerDto.getFirstName());
+        user.setLastName(registerDto.getLastName());
+        user.setEmail(registerDto.getEmail());
+        return user;
+    }
+
     public UserDto toDto(User user) {
         if (user == null) return null;
         UserDto userDto = new UserDto();

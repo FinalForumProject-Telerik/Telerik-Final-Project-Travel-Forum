@@ -77,6 +77,9 @@ public class AuthenticationHelper {
             if (!user.getPassword().equals(password)) {
                 throw new AuthorizationException(INVALID_AUTHENTICATION_ERROR);
             }
+            if (user.isBlocked()) {
+                throw new AuthorizationException("User is blocked.");
+            }
             return user;
         } catch (EntityNotFoundException e) {
             throw new AuthorizationException(INVALID_AUTHENTICATION_ERROR);

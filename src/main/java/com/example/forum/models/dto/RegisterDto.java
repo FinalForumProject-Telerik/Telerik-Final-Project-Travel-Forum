@@ -13,8 +13,8 @@ public class RegisterDto extends LoginDto {
     @NotEmpty(message = "Last name can't be empty")
     private String lastName;
 
-    @NotEmpty(message = "Email can't be empty")
-    private String email;
+    @NotEmpty(message = "Username can't be empty")
+    private String username;
 
     public String getPasswordConfirm() {
         return passwordConfirm;
@@ -40,11 +40,11 @@ public class RegisterDto extends LoginDto {
         this.lastName = lastName;
     }
 
-    public String getEmail() {
-        return email;
+    public String getUsername() {
+        return username;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setUsername(String username) {
+        this.username = username;
     }
 }

@@ -1,3 +1,4 @@
+<!-- html -->
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <form th:replace="~{fragments/PageLayout.html :: head('Login')}"></form>
@@ -6,17 +7,17 @@
 
 <div class="body-content">
     <h2>Login</h2>
-    <form action="#" th:action="@{/user/login}" th:object="${login}" method="post">
-        <label th:text="#{user.label.email}">Email</label>
+    <form th:action="@{/user/login}" th:object="${user}" method="post">
+        <label>Username</label>
         <br/>
         <input type="text" th:field="*{email}"/>
-        <label class="error" th:errors="*{email}">Email error placeholder</label>
+        <label class="error" th:errors="*{email}">Username error</label>
         <br/><br/>
 
-        <label th:text="#{user.label.password}">Password</label>
+        <label>Password</label>
         <br/>
         <input type="password" th:field="*{password}"/>
-        <label class="error" th:errors="*{password}">Password error placeholder</label>
+        <label class="error" th:errors="*{password}">Password error</label>
         <br/><br/>
 
         <input type="submit" value="Login"/>
