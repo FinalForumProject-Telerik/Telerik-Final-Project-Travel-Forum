@@ -162,6 +162,7 @@ src/main/java/com/example/forum/
 │   ├── User.java
 │   ├── Post.java
 │   ├── Comment.java
+│   ├── Admin.java
 │   └── dto/                     # Data Transfer Objects
 ├── repositories/                # Data access layer
 └── services/                    # Business logic layer
