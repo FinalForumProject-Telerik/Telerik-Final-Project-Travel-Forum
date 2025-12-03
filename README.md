@@ -138,7 +138,7 @@ database.password=your_password
 
 API requests require HTTP Basic Authentication headers:
 ```
-Authorization: Basic <base64-encoded-credentials>
+Authorization: Basic unencrypted header authentication
 ```
 
 ## Project Structure
