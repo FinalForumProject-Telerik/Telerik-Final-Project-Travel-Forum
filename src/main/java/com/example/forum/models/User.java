@@ -18,6 +18,7 @@ public class User {
     private int id;
 
     @NotBlank(message = "Username is required")
+    @Size(min = 4, max = 32, message = "Username must be between 4 and 32 symbols")
     @Column(name = "username", nullable = false)
     private String username;
 

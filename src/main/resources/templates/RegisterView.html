@@ -36,6 +36,11 @@
         <input type="password" th:field="*{password}"/>
         <label class="error" th:errors="*{password}">Password error placeholder</label>
         <br/><br/>
+        <label th:text="#{user.label.password.confirm}">Password confirm</label>
+        <br/>
+        <input type="password" th:field="*{passwordConfirm}"/>
+        <label class="label-error" th:errors="*{passwordConfirm}">Error placeholder </label>
+        <br><br>
 
         <input type="submit" value="Login"/>
     </form>

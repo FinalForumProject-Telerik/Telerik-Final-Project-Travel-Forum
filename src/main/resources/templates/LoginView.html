@@ -8,10 +8,10 @@
 <div class="body-content">
     <h2>Login</h2>
     <form th:action="@{/user/login}" th:object="${user}" method="post">
-        <label>Username</label>
+        <label>Email</label>
         <br/>
         <input type="text" th:field="*{email}"/>
-        <label class="error" th:errors="*{email}">Username error</label>
+        <label class="error" th:errors="*{email}">Email error</label>
         <br/><br/>
 
         <label>Password</label>

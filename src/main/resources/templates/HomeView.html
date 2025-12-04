@@ -1,10 +1,8 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Travel Forum - Home</title>
-</head>
+<form th:replace="~{fragments/PageLayout.html :: head('Home')}"></form>
 <body>
+<form th:replace="~{fragments/PageLayout.html :: header}"></form>
 
 <header>
     <h1>Welcome to the Travel Forum</h1>
@@ -33,9 +31,9 @@
         <!-- If user is not logged in -->
         <div th:if="${currentUser == null}">
             <p>
-                <a th:href="@{/login}">Log in</a>
+                <a th:href="@{/user/login}">Log in</a>
                 or
-                <a th:href="@{/register}">Register</a>
+                <a th:href="@{/user/register}">Register</a>
                 to start posting.
             </p>
         </div>
@@ -94,7 +92,7 @@
     </section>
 
 </main>
-
+<form th:replace="~{fragments/PageLayout.html :: footer}"></form>
 </body>
 </html>
 

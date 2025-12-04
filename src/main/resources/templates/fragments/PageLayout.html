@@ -16,10 +16,10 @@
                th:href="@{/auth/logout}"
                th:text="#{navigation.logout}">Logout</a>
             <a th:unless="${session.currentUser}"
-               th:href="@{/auth/login}"
+               th:href="@{/user/login}"
                th:text="#{navigation.login}">login</a>
             <a th:unless="${session.currentUser}"
-               th:href="@{/auth/register}"
+               th:href="@{/user/register}"
                th:text="#{navigation.register}">Register</a>
         </h3>
     </div>
