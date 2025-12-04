@@ -2,6 +2,7 @@ package com.example.forum.controllers.mvc;
 
 import com.example.forum.exceptions.AuthorizationException;
 import com.example.forum.exceptions.EntityDuplicateException;
+import com.example.forum.exceptions.EntityNotFoundException;
 import com.example.forum.helpers.AuthenticationHelper;
 import com.example.forum.helpers.UserMapper;
 import com.example.forum.models.User;
@@ -27,6 +28,13 @@ public class UserMvcController {
         this.userService = userService;
         this.authenticationHelper = authenticationHelper;
     }
+
+    @GetMapping("/test-error")
+    public String testErrorPage() {
+        // This will be caught by GlobalExceptionHandler
+        throw new EntityNotFoundException("User", 999);
+    }
+
 
     @GetMapping("/login")
     public String login(Model model) {
