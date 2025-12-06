@@ -26,4 +26,5 @@ public interface UserService {
     void promoteUser(int id, User requester);
 
     List<UserDto> searchUsers(String username, String email, String firstName, User requester);
+    void updateUserProfile(User updatedUser, User currentUser);
 }

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/PageLayout.html :: head('Edit Profile')}"></head>
+<body>
+<header th:replace="~{fragments/PageLayout.html :: header}"></header>
+
+<div class="body-content">
+    <h1>✏️ Edit Profile</h1>
+    <p class="text-muted mb-lg">Update your profile information below.</p>
+
+    <form th:action="@{/user/edit}" th:object="${user}" method="post">
+        <!-- Username (Read-only) -->
+        <div class="form-group">
+            <label for="username">Username (cannot be changed)</label>
+            <input id="username" type="text" th:field="*{username}" readonly style="background-color: #e9ecef; cursor: not-allowed;"/>
+        </div>
+
+        <!-- First Name -->
+        <div class="form-group">
+            <label for="firstName">First Name</label>
+            <input id="firstName" type="text" th:field="*{firstName}" placeholder="Enter your first name"/>
+            <label class="error" th:errors="*{firstName}">First name error</label>
+        </div>
+
+        <!-- Last Name -->
+        <div class="form-group">
+            <label for="lastName">Last Name</label>
+            <input id="lastName" type="text" th:field="*{lastName}" placeholder="Enter your last name"/>
+            <label class="error" th:errors="*{lastName}">Last name error</label>
+        </div>
+
+        <!-- Email -->
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" type="email" th:field="*{email}" placeholder="Enter your email"/>
+            <label class="error" th:errors="*{email}">Email error</label>
+        </div>
+
+        <!-- Password -->
+        <div class="form-group">
+            <label for="password">New Password (leave blank to keep current password)</label>
+            <input id="password" type="password" th:field="*{password}" placeholder="Enter new password (optional)"/>
+            <label class="error" th:errors="*{password}">Password error</label>
+        </div>
+
+        <!-- Password Confirmation -->
+        <div class="form-group">
+            <label for="passwordConfirm">Confirm New Password</label>
+            <input id="passwordConfirm" type="password" th:field="*{passwordConfirm}" placeholder="Confirm new password"/>
+            <label class="error" th:errors="*{passwordConfirm}">Password confirmation error</label>
+        </div>
+
+        <!-- Action Buttons -->
+        <div class="action-buttons">
+            <input type="submit" value="💾 Save Changes"/>
+            <a th:href="@{/user/view}">
+                <button type="button">Cancel</button>
+            </a>
+        </div>
+    </form>
+</div>
+
+<footer th:replace="~{fragments/PageLayout.html :: footer}"></footer>
+</body>
+</html>
+

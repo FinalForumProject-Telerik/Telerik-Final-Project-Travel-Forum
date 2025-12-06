@@ -8,6 +8,7 @@ import com.example.forum.helpers.UserMapper;
 import com.example.forum.models.User;
 import com.example.forum.models.dto.LoginDto;
 import com.example.forum.models.dto.RegisterDto;
+import com.example.forum.models.dto.UpdateUserDto;
 import com.example.forum.services.UserService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -95,6 +96,73 @@ public class UserMvcController {
         } catch (EntityDuplicateException e) {
             bindingResult.rejectValue("username", "username_error", e.getMessage());
             return "RegisterView";
+        }
+    }
+    @GetMapping("/view")
+    public String viewProfile(Model model, HttpSession session) {
+        try {
+            User currentUser = authenticationHelper.tryGetCurrentUser(session);
+            model.addAttribute("user", currentUser);
+            return "UserProfileView";
+        } catch (AuthorizationException e) {
+            return "redirect:/user/login";
+        }
+    }
+    @GetMapping("/edit")
+    public String showEditProfile(Model model, HttpSession session) {
+        try {
+            User currentUser = authenticationHelper.tryGetCurrentUser(session);
+            UpdateUserDto updateUserDto = userMapper.toUpdateUserDto(currentUser);
+            model.addAttribute("user", updateUserDto);
+            return "UserEditProfileView";
+        } catch (AuthorizationException e) {
+            return "redirect:/user/login";
+        }
+    }
+    @PostMapping("/edit")
+    public String editProfile(@Valid @ModelAttribute("user") UpdateUserDto updateUserDto,
+                              BindingResult bindingResult,
+                              HttpSession session,
+                              Model model) {
+        try {
+            User currentUser = authenticationHelper.tryGetCurrentUser(session);
+
+            if (bindingResult.hasErrors()) {
+                model.addAttribute("user", updateUserDto);
+                return "UserEditProfileView";
+            }
+
+            // Validate password confirmation only if password is provided
+            if (updateUserDto.getPassword() != null && !updateUserDto.getPassword().isEmpty()) {
+                // Validate password length
+                if (updateUserDto.getPassword().length() < 4 || updateUserDto.getPassword().length() > 32) {
+                    bindingResult.rejectValue("password", "password_error", "Password must be between 4 and 32 symbols");
+                    model.addAttribute("user", updateUserDto);
+                    return "UserEditProfileView";
+                }
+
+                // Validate password confirmation matches
+                if (!updateUserDto.getPassword().equals(updateUserDto.getPasswordConfirm())) {
+                    bindingResult.rejectValue("passwordConfirm", "password_error", "Password confirmation should match password.");
+                    model.addAttribute("user", updateUserDto);
+                    return "UserEditProfileView";
+                }
+            }
+
+            User updatedUser = userMapper.fromDto(updateUserDto);
+            updatedUser.setUsername(currentUser.getUsername());
+            updatedUser.setId(currentUser.getId());
+            userService.updateUserProfile(updatedUser, currentUser);
+
+            session.removeAttribute("currentUser");
+
+            return "redirect:/user/login";
+        } catch (AuthorizationException e) {
+            return "redirect:/user/login";
+        } catch (EntityDuplicateException e) {
+            bindingResult.rejectValue("email", "email_error", e.getMessage());
+            model.addAttribute("user", updateUserDto);
+            return "UserEditProfileView";
         }
     }
 

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/PageLayout.html :: head('User Profile')}"></head>
+<body>
+<header th:replace="~{fragments/PageLayout.html :: header}"></header>
+
+<div class="body-content">
+    <h1>👤 User Profile</h1>
+    <p class="text-muted mb-lg">View and manage your profile information.</p>
+
+    <section>
+        <h2>Profile Information</h2>
+
+        <div class="profile-info">
+            <div class="profile-field">
+                <label class="profile-label">First Name:</label>
+                <span class="profile-value" th:text="${user.firstName}">First Name</span>
+            </div>
+
+            <div class="profile-field">
+                <label class="profile-label">Last Name:</label>
+                <span class="profile-value" th:text="${user.lastName}">Last Name</span>
+            </div>
+
+            <div class="profile-field">
+                <label class="profile-label">Email:</label>
+                <span class="profile-value" th:text="${user.email}">email@example.com</span>
+            </div>
+
+            <div class="profile-field">
+                <label class="profile-label">Username:</label>
+                <span class="profile-value" th:text="${user.username}">username</span>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <a th:href="@{/user/edit}">
+                <button type="button" class="btn-primary">✏️ Edit Profile</button>
+            </a>
+        </div>
+    </section>
+</div>
+
+<footer th:replace="~{fragments/PageLayout.html :: footer}"></footer>
+</body>
+</html>
+

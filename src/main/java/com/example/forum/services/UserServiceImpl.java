@@ -105,6 +105,34 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public void updateUserProfile(User updatedUser, User currentUser) {
+        User existingUser = userRepository.get(currentUser.getId());
+
+        // Check if email is being changed and if it's already taken by another user
+        if (!existingUser.getEmail().equals(updatedUser.getEmail())) {
+            try {
+                User userWithEmail = userRepository.getByEmail(updatedUser.getEmail());
+                // If a user with this email exists and it's not the current user
+                if (userWithEmail.getId() != existingUser.getId()) {
+                    throw new EntityDuplicateException("User", "email", updatedUser.getEmail());
+                }
+            } catch (EntityNotFoundException e) {
+                // Email not taken, can proceed
+            }
+        }
+        existingUser.setFirstName(updatedUser.getFirstName());
+        existingUser.setLastName(updatedUser.getLastName());
+        existingUser.setEmail(updatedUser.getEmail());
+
+        // Only update password if it's provided and not empty
+        if (updatedUser.getPassword() != null && !updatedUser.getPassword().isEmpty()) {
+            existingUser.setPassword(updatedUser.getPassword());
+        }
+
+        userRepository.update(existingUser);
+    }
+
+    @Override
     public void promoteUser(int id, User requester) {
         if (!requester.isAdmin()) {
             throw new AuthorizationException("Not authorized");

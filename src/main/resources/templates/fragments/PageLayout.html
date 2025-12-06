@@ -27,6 +27,9 @@
             <a th:unless="${session.currentUser}"
                th:href="@{/user/register}"
                th:text="'📋 ' + #{navigation.register}">Register</a>
+            <a th:if="${session.currentUser}"
+               th:href="@{/user/view}"
+               th:text="'🚪 ' + #{navigation.view.user}">Account</a>
         </h3>
     </div>
 </header>
