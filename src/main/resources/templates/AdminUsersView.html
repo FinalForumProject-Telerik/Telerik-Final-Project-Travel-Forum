@@ -1,0 +1,105 @@
+<!-- html -->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="~{fragments/PageLayout.html :: head('Admin - Users')}"></head>
+<body>
+<header th:replace="~{fragments/PageLayout.html :: header}"></header>
+
+<main>
+
+    <section th:if="${currentUser != null and currentUser.isAdmin()}">
+        <h2>Admin: Search and manage users</h2>
+
+        <form th:action="@{/admin/users}" method="get">
+            <label>Username:</label>
+            <input type="text" name="username" th:value="${username}" />
+            <label>Email:</label>
+            <input type="text" name="email" th:value="${email}" />
+            <label>First name:</label>
+            <input type="text" name="firstName" th:value="${firstName}" />
+            <button type="submit">Search</button>
+            <a th:href="@{/admin/users}"><button type="button">Show all</button></a>
+        </form>
+
+        <div th:if="${#lists.isEmpty(users)}">
+            <p>No users found.</p>
+        </div>
+
+        <table th:if="${!#lists.isEmpty(users)}">
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Username</th>
+                <th>Email</th>
+                <th>First</th>
+                <th>Last</th>
+                <th>Blocked</th>
+                <th>Admin</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="u : ${users}">
+                <td th:text="${u.id}">1</td>
+                <td th:text="${u.username}">username</td>
+                <td th:text="${u.email}">email</td>
+                <td th:text="${u.firstName}">First</td>
+                <td th:text="${u.lastName}">Last</td>
+                <td th:text="${u.isBlocked()}">false</td>
+                <td th:text="${u.isAdmin()}">false</td>
+                <td>
+                    <form th:action="@{/admin/users/{id}/block(id=${u.id})}" method="post" th:if="${!u.isBlocked()}" style="display:inline">
+                        <input type="hidden" name="username" th:value="${username}" />
+                        <input type="hidden" name="email" th:value="${email}" />
+                        <input type="hidden" name="firstName" th:value="${firstName}" />
+                        <button type="submit">Block</button>
+                    </form>
+                    <form th:action="@{/admin/users/{id}/unblock(id=${u.id})}" method="post" th:if="${u.isBlocked()}" style="display:inline">
+                        <input type="hidden" name="username" th:value="${username}" />
+                        <input type="hidden" name="email" th:value="${email}" />
+                        <input type="hidden" name="firstName" th:value="${firstName}" />
+                        <button type="submit">Unblock</button>
+                    </form>
+
+                    <form th:action="@{/admin/users/{id}/promote(id=${u.id})}" method="post" th:if="${!u.isAdmin()}" style="display:inline; margin-left:6px">
+                        <input type="hidden" name="username" th:value="${username}" />
+                        <input type="hidden" name="email" th:value="${email}" />
+                        <input type="hidden" name="firstName" th:value="${firstName}" />
+                        <button type="submit">Promote to Admin</button>
+                    </form>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <hr/>
+        <h3>Delete post or comment by id</h3>
+        <form th:action="@{/admin/posts/{id}/delete(id=${0})}" method="post" onsubmit="return true;">
+            <label>Post id:</label>
+            <input type="number" name="postId" id="postId" />
+            <input type="hidden" name="username" th:value="${username}" />
+            <input type="hidden" name="email" th:value="${email}" />
+            <input type="hidden" name="firstName" th:value="${firstName}" />
+            <button type="submit" formaction="#" th:onclick="|this.form.action='/admin/posts/' + document.getElementById('postId').value + '/delete'|">Delete Post</button>
+        </form>
+
+        <form th:action="@{/admin/comments/{id}/delete(id=${0})}" method="post" onsubmit="return true;">
+            <label>Comment id:</label>
+            <input type="number" name="commentId" id="commentId" />
+            <input type="hidden" name="username" th:value="${username}" />
+            <input type="hidden" name="email" th:value="${email}" />
+            <input type="hidden" name="firstName" th:value="${firstName}" />
+            <button type="submit" formaction="#" th:onclick="|this.form.action='/admin/comments/' + document.getElementById('commentId').value + '/delete'|">Delete Comment</button>
+        </form>
+
+    </section>
+
+    <section th:unless="${currentUser != null and currentUser.isAdmin()}">
+        <p>Only administrators can access this page.</p>
+    </section>
+
+</main>
+
+<footer th:replace="~{fragments/PageLayout.html :: footer}"></footer>
+</body>
+</html>

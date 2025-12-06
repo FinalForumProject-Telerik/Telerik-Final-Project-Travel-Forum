@@ -82,6 +82,19 @@ public class UserRestController {
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
     }
+
+    @PostMapping ("/{id}/promote")
+    public void promoteUser(@PathVariable int id, @RequestHeader HttpHeaders headers) {
+        try {
+            User admin = authenticationHelper.tryGetUser(headers);
+            usersService.promoteUser(id, admin);
+        } catch (EntityNotFoundException e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        } catch (AuthorizationException e) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
+        }
+    }
+
     @GetMapping
     public List<UserDto> getAllUsers(@RequestHeader HttpHeaders headers) {
 

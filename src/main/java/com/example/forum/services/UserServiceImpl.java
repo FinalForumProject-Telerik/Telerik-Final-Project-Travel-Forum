@@ -7,7 +7,6 @@ import com.example.forum.helpers.UserMapper;
 import com.example.forum.models.dto.UserDto;
 import com.example.forum.repositories.UserRepository;
 import com.example.forum.models.User;
-import com.example.forum.helpers.AuthenticationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -103,5 +102,15 @@ public class UserServiceImpl implements UserService {
     public List<UserDto> searchUsers(String username, String email, String firstName, User requester) {
         List<User> result = userRepository.search(username, email, firstName, requester);
         return result.stream().map(userMapper :: toDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public void promoteUser(int id, User requester) {
+        if (!requester.isAdmin()) {
+            throw new AuthorizationException("Not authorized");
+        }
+        User user = userRepository.get(id);
+        user.setAdmin(true);
+        userRepository.update(user);
     }
 }

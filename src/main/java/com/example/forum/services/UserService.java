@@ -23,7 +23,7 @@ public interface UserService {
 
     List<UserDto> getUsers();
 
-
+    void promoteUser(int id, User requester);
 
     List<UserDto> searchUsers(String username, String email, String firstName, User requester);
 }

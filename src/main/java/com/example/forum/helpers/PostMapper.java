@@ -19,7 +19,10 @@ public class PostMapper {
 
     public Post fromDto(PostDto dto) {
         Post post = new Post();
-        post.setId(dto.getId());
+        // Only set ID if it exists (for updates, not for new posts)
+        if (dto.getId() != null) {
+            post.setId(dto.getId());
+        }
         post.setTitle(dto.getTitle());
         post.setContent(dto.getContent());
         // User will be set by the service/controller layer

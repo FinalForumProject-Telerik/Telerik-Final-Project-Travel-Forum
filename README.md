@@ -24,18 +24,15 @@ Travel Forum is a web application designed for travel enthusiasts to share their
 - **User Management**
   - User registration with email verification
   - Secure login/logout functionality
-  - Profile customization with profile photos
   - Admin privileges for platform moderation
 
 - **Posts**
   - Create, read, update, and delete travel-related posts
   - Like system to appreciate helpful content
-  - Tag posts for better categorization (e.g., Travel, Photography, Scuba Diving)
   - Search and filter posts
 
 - **Comments**
   - Engage in discussions by commenting on posts
-  - Edit and delete your own comments
   - Threaded conversations for organized discussions
 
 - **Administration**

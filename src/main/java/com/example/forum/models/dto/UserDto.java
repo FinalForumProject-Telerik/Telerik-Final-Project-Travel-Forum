@@ -6,6 +6,8 @@ import jakarta.validation.constraints.Size;
 
 public class UserDto {
 
+    private int id;
+
     @NotBlank(message = "First name is required")
     @Size(min = 4, max = 32, message = "First name must be between 4 and 32 symbols")
     private String firstName;
@@ -24,7 +26,19 @@ public class UserDto {
     @NotBlank(message = "Password is required")
     private String password;
 
+    private boolean isBlocked;
+
+    private boolean isAdmin;
+
     public UserDto() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -65,6 +79,22 @@ public class UserDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isBlocked() {
+        return isBlocked;
+    }
+
+    public void setBlocked(boolean blocked) {
+        isBlocked = blocked;
+    }
+
+    public boolean isAdmin() {
+        return isAdmin;
+    }
+
+    public void setAdmin(boolean admin) {
+        isAdmin = admin;
     }
 }
 

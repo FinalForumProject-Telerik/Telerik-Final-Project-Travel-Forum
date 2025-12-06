@@ -49,18 +49,20 @@ public class UserMvcController {
         if (bindingResult.hasErrors()) {
             return "LoginView";
         }
-
         try {
-            authenticationHelper.verifyAuthentication(loginDto.getEmail(), loginDto.getPassword());
-            session.setAttribute("currentUser", loginDto.getEmail());
+            User authenticated = authenticationHelper.verifyAuthentication(
+                    loginDto.getEmail(),
+                    loginDto.getPassword()
+            );
+            session.setAttribute("currentUser", authenticated);
             return "redirect:/";
-        } catch (
-                AuthorizationException e) {
+        } catch (AuthorizationException e) {
             bindingResult.rejectValue("email", "auth_error", e.getMessage());
             bindingResult.rejectValue("password", "auth_error", e.getMessage());
             return "LoginView";
         }
     }
+
 
     @GetMapping("/logout")
     public String handleLogout(HttpSession session) {
