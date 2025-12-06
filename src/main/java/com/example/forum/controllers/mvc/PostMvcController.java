@@ -82,6 +82,44 @@ public class PostMvcController {
             return "ErrorView";
         }
     }
+
+    @GetMapping("/new")
+    public String showCreatePost(Model model, HttpSession session) {
+        try {
+            authenticationHelper.tryGetCurrentUser(session);
+        } catch (AuthorizationException e) {
+            return "redirect:/user/login";
+        }
+
+        model.addAttribute("post", new PostDto());
+        return "PostCreateView";
+    }
+
+    @PostMapping("/new")
+    public String createPost(@Valid @ModelAttribute("post") PostDto postDto,
+                             BindingResult bindingResult,
+                             HttpSession session,
+                             Model model) {
+        User user;
+        try {
+            user = authenticationHelper.tryGetCurrentUser(session);
+        } catch (AuthorizationException e) {
+            return "redirect:/user/login";
+        }
+
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("post", postDto);
+            return "PostCreateView";
+        }
+
+        Post post = postMapper.fromDto(postDto);
+        postService.createPost(post, user);
+        
+        return "redirect:/posts/" + post.getId();
+    }
+
+
+
     @PostMapping("/{id}/comment")
     public String addCommentToPost(@PathVariable int id, @Valid @ModelAttribute("comment") CommentDto commentDto,
                                    BindingResult bindingResult, HttpSession session, Model model) {
@@ -89,7 +127,7 @@ public class PostMvcController {
         try {
             user = authenticationHelper.tryGetCurrentUser(session);
         } catch (AuthorizationException e) {
-            return "redirect:/auth/login";
+            return "redirect:/user/login";
         }
         if (bindingResult.hasErrors()) {
             try {
