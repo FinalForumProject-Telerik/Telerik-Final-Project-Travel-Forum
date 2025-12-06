@@ -90,8 +90,9 @@ public class PostMvcController {
         } catch (AuthorizationException e) {
             return "redirect:/user/login";
         }
+        PostDto postDto = new PostDto();
 
-        model.addAttribute("post", new PostDto());
+        model.addAttribute("post", postDto);
         return "PostCreateView";
     }
 
