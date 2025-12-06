@@ -11,14 +11,22 @@
         <h2>Admin: Search and manage users</h2>
 
         <form th:action="@{/admin/users}" method="get">
-            <label>Username:</label>
-            <input type="text" name="username" th:value="${username}" />
-            <label>Email:</label>
-            <input type="text" name="email" th:value="${email}" />
-            <label>First name:</label>
-            <input type="text" name="firstName" th:value="${firstName}" />
-            <button type="submit">Search</button>
-            <a th:href="@{/admin/users}"><button type="button">Show all</button></a>
+            <div>
+                <label>Username:</label>
+                <input type="text" name="username" th:value="${username}" />
+            </div>
+            <div>
+                <label>Email:</label>
+                <input type="text" name="email" th:value="${email}" />
+            </div>
+            <div>
+                <label>First name:</label>
+                <input type="text" name="firstName" th:value="${firstName}" />
+            </div>
+            <div>
+                <button type="submit">Search</button>
+                <a th:href="@{/admin/users}"><button type="button">Show all</button></a>
+            </div>
         </form>
 
         <div th:if="${#lists.isEmpty(users)}">

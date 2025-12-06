@@ -15,6 +15,9 @@
             <a href="#" th:href="@{/posts}" th:text="'📝 ' + #{navigation.posts}">Posts</a>
             <a href="#" th:href="@{/posts/new}" th:text="'✏️ ' + #{navigation.create-post}">Create a post</a>
             <a href="#" th:href="@{/about}" th:text="'ℹ️ ' + #{navigation.about}">About</a>
+            <a th:if="${session.currentUser != null and session.currentUser.isAdmin()}"
+               th:href="@{/admin/users}"
+               th:text="'👨‍💼 ' + #{navigation.admin}">Admin Panel</a>
             <a th:if="${session.currentUser}"
                th:href="@{/user/logout}"
                th:text="'🚪 ' + #{navigation.logout}">Logout</a>

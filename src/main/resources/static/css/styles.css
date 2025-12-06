@@ -148,7 +148,7 @@ footer small {
    MAIN CONTENT AREA
    ============================================ */
 main {
-    max-width: 1000px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: var(--spacing-xl);
 }
@@ -216,10 +216,12 @@ a:hover {
 section {
     background: rgba(255, 255, 255, 0.2);
     border-radius: var(--radius-md);
-    padding: var(--spacing-lg);
+    padding: var(--spacing-xl);
     margin-bottom: var(--spacing-lg);
     box-shadow: var(--shadow-md);
     backdrop-filter: blur(10px);
+    max-width: 100%;
+    width: 100%;
 }
 
 section h2 {
@@ -864,3 +866,157 @@ body:has(main > section:only-child) main {
 .mb-lg {
     margin-bottom: var(--spacing-lg);
 }
+
+/* ============================================
+   ADMIN PANEL STYLES
+   ============================================ */
+/* Admin section heading */
+section h2 {
+    color: #ffffff;
+    font-weight: 700;
+    margin-top: 0;
+}
+
+section h3 {
+    color: #ffffff;
+    font-weight: 700;
+    margin-top: var(--spacing-2xl);
+    margin-bottom: var(--spacing-md);
+}
+
+/* Admin table styling */
+
+table thead {
+    background: linear-gradient(135deg, var(--mountain-blue) 0%, #2d5a87 100%);
+}
+
+table th {
+    padding: var(--spacing-md);
+    text-align: left;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+table tbody tr {
+    transition: background-color 0.2s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+table tbody tr:nth-child(even) {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+table tbody tr:hover {
+    background: rgba(59, 130, 246, 0.2);
+}
+
+table td {
+    padding: var(--spacing-md);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 0.95rem;
+}
+
+/* Action buttons in table - inline display */
+table td form {
+    display: inline-block;
+    margin: 0 4px 0 0;
+}
+
+table td button {
+    margin: 0;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+}
+
+table td form button {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+}
+
+table td form button:hover {
+    transform: translateY(-1px);
+}
+
+/* Admin form labels */
+section form label {
+    color: #ffffff;
+    font-weight: 700;
+}
+
+/* Admin search form */
+section form {
+    display: block;
+    max-width: 100%;
+    margin-bottom: var(--spacing-xl);
+}
+
+section form div {
+    margin-bottom: var(--spacing-md);
+}
+
+section form label {
+    display: inline-block;
+    width: 120px;
+    margin-right: var(--spacing-sm);
+    margin-bottom: 0;
+    vertical-align: middle;
+}
+
+section form input[type="text"],
+section form input[type="number"] {
+    width: 250px;
+    margin-right: var(--spacing-md);
+    vertical-align: middle;
+}
+
+section form button {
+    margin: 0;
+    margin-right: var(--spacing-sm);
+}
+
+section form div:last-child {
+    margin-top: var(--spacing-md);
+}
+
+section form br {
+    display: block;
+    margin-bottom: var(--spacing-md);
+}
+
+/* Center the admin table */
+table {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-collapse: collapse;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    backdrop-filter: blur(5px);
+    display: table;
+}
+
+/* Center table within section */
+section > table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* No users found message */
+section > div p {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+/* Horizontal rule - add more spacing */
+section hr {
+    border: none;
+    border-top: 2px solid rgba(255, 255, 255, 0.2);
+    margin: var(--spacing-2xl) 0 var(--spacing-xl) 0;
+}
+
