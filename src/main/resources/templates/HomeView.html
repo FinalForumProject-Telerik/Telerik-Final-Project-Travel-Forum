@@ -85,7 +85,7 @@
                    th:text="${post.title}">Post title</a>
                 <span class="text-muted"> — </span>
                 <span class="text-muted">🕐 </span>
-                <span class="text-muted" th:text="${post.createdAt}">2025-01-01T12:00</span>
+                <span class="text-muted" th:text="${post.createdAt == null ? '' : #temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}">2025-01-01 12:00</span>
             </li>
         </ul>
     </section>

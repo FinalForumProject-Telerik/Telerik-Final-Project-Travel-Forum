@@ -62,27 +62,14 @@ html {
 body {
     margin: 0;
     font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-    background: linear-gradient(180deg, var(--bg-light) 0%, #e0f2fe 100%);
-    background-attachment: fixed;
+    background: url('../images/Background Forum.jpg') no-repeat center center fixed;
+    background-size: cover;
     color: var(--text-dark);
     line-height: 1.6;
     min-height: 100vh;
 }
 
-/* Mountain silhouette background decoration */
-body::before {
-    content: '';
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 200px;
-    background: linear-gradient(135deg, transparent 40%, rgba(30, 58, 95, 0.05) 40%, rgba(30, 58, 95, 0.05) 45%, transparent 45%),
-                linear-gradient(225deg, transparent 40%, rgba(30, 58, 95, 0.08) 40%, rgba(30, 58, 95, 0.08) 50%, transparent 50%),
-                linear-gradient(180deg, transparent 60%, rgba(30, 58, 95, 0.03) 100%);
-    pointer-events: none;
-    z-index: -1;
-}
+/* Mountain silhouette background decoration - removed, using background image instead */
 
 /* ============================================
    HEADER / NAVIGATION
@@ -103,6 +90,18 @@ body > header:first-child > div {
     display: flex;
     justify-content: center;
     align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.header-logo {
+    height: 50px;
+    width: auto;
+    margin-right: auto;
+    transition: transform 0.2s ease;
+}
+
+.header-logo:hover {
+    transform: scale(1.05);
 }
 
 body > header:first-child h3 {
@@ -158,14 +157,15 @@ main {
     max-width: 900px;
     margin: var(--spacing-xl) auto;
     padding: var(--spacing-xl);
-    background: var(--bg-white);
+    background: rgba(255, 255, 255, 0.2);
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-lg);
     text-align: left;
+    backdrop-filter: blur(10px);
 }
 
 .body-content h1, .body-content h2 {
-    color: var(--mountain-blue);
+    color: #ffffff;
     margin-top: 0;
 }
 
@@ -179,6 +179,20 @@ main {
 .body-content h2 {
     font-size: 1.5rem;
     margin-bottom: var(--spacing-md);
+}
+
+.body-content p {
+    color: #ffffff;
+}
+
+.body-content a {
+    color: var(--sky-blue);
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.body-content a:hover {
+    color: #ffffff;
 }
 
 /* ============================================
@@ -199,16 +213,16 @@ a:hover {
    CARDS & SECTIONS
    ============================================ */
 section {
-    background: var(--bg-white);
+    background: rgba(255, 255, 255, 0.2);
     border-radius: var(--radius-md);
     padding: var(--spacing-lg);
     margin-bottom: var(--spacing-lg);
     box-shadow: var(--shadow-md);
-    border-left: 4px solid var(--mountain-teal);
+    backdrop-filter: blur(10px);
 }
 
 section h2 {
-    color: var(--mountain-blue);
+    color: #ffffff;
     margin-top: 0;
     font-size: 1.3rem;
     display: flex;
@@ -223,7 +237,7 @@ section h2::before {
 
 section p {
     margin: var(--spacing-sm) 0;
-    color: var(--text-dark);
+    color: #ffffff;
 }
 
 section ul {
@@ -233,23 +247,53 @@ section ul {
 
 section li {
     margin-bottom: var(--spacing-sm);
-    color: var(--text-dark);
+    color: #ffffff;
+}
+
+section a {
+    color: var(--sky-blue);
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+section a:hover {
+    color: #ffffff;
+}
+
+section strong {
+    color: #ffffff;
 }
 
 /* About section styling */
 .about-section {
-    background: var(--bg-white);
+    background: rgba(255, 255, 255, 0.2);
     border-radius: var(--radius-md);
     padding: var(--spacing-lg);
     margin-bottom: var(--spacing-lg);
     box-shadow: var(--shadow-md);
-    border-left: 4px solid var(--mountain-teal);
+    backdrop-filter: blur(10px);
 }
 
 .about-section h2 {
-    color: var(--mountain-blue);
+    color: #ffffff;
     margin-top: 0;
     font-size: 1.3rem;
+}
+
+.about-section p {
+    color: #ffffff;
+}
+
+.about-section ul {
+    color: #ffffff;
+}
+
+.about-section li {
+    color: #ffffff;
+}
+
+.about-section strong {
+    color: #ffffff;
 }
 
 /* ============================================
@@ -259,11 +303,12 @@ section li {
     display: table;
     width: 100%;
     margin: 0 auto;
-    background: var(--bg-white);
+    background: rgba(255, 255, 255, 0.1);
     border-radius: var(--radius-md);
     overflow: hidden;
     box-shadow: var(--shadow-md);
     border-collapse: collapse;
+    backdrop-filter: blur(5px);
 }
 
 .header {
@@ -292,27 +337,29 @@ section li {
 }
 
 .row:nth-child(even) {
-    background: var(--bg-light);
+    background: rgba(255, 255, 255, 0.05);
 }
 
 .row:hover {
-    background: var(--primary-light);
+    background: rgba(59, 130, 246, 0.2);
 }
 
 .cell {
     display: table-cell;
     padding: var(--spacing-md);
-    border-bottom: 1px solid var(--border-light);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     vertical-align: middle;
+    color: #ffffff;
 }
 
 .cell a {
-    font-weight: 500;
-    color: var(--primary-color);
+    font-weight: 700;
+    color: var(--sky-blue);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 .cell a:hover {
-    color: var(--primary-hover);
+    color: #ffffff;
 }
 
 /* ============================================
@@ -325,7 +372,7 @@ form {
 label {
     display: block;
     font-weight: 600;
-    color: var(--text-dark);
+    color: #ffffff;
     margin-bottom: var(--spacing-xs);
     font-size: 0.95rem;
 }
@@ -390,7 +437,7 @@ button[type="button"]:hover {
 
 .form-label {
     font-weight: 600;
-    color: var(--text-dark);
+    color: #ffffff;
 }
 
 .form-input {
@@ -420,11 +467,22 @@ button[type="button"]:hover {
 }
 
 .post-content {
-    background: var(--bg-light);
+    background: rgba(255, 255, 255, 0.15);
     padding: var(--spacing-lg);
     border-radius: var(--radius-md);
     margin-bottom: var(--spacing-lg);
     border-left: 4px solid var(--mountain-teal);
+    backdrop-filter: blur(5px);
+}
+
+.post-content p {
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.post-content strong {
+    color: #ffffff;
+    font-weight: 700;
 }
 
 .form-error,
@@ -433,7 +491,8 @@ button[type="button"]:hover {
     color: var(--error-color);
     font-size: 0.85rem;
     margin-top: var(--spacing-xs);
-    display: block;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
 }
 
 /* ============================================
@@ -525,7 +584,7 @@ a.nav {
 }
 
 .comments-section h3 {
-    color: var(--mountain-blue);
+    color: #ffffff;
     font-size: 1.3rem;
     margin-bottom: var(--spacing-md);
     display: flex;
@@ -538,22 +597,23 @@ a.nav {
 }
 
 .comment {
-    background: var(--bg-light);
+    background: rgba(255, 255, 255, 0.15);
     border-radius: var(--radius-md);
     padding: var(--spacing-md);
     margin-bottom: var(--spacing-md);
     border-left: 3px solid var(--mountain-teal);
+    backdrop-filter: blur(5px);
 }
 
 .comment-content {
     margin: 0 0 var(--spacing-sm) 0;
-    color: var(--text-dark);
+    color: #ffffff;
     line-height: 1.6;
 }
 
 .comment-meta {
     font-size: 0.85rem;
-    color: var(--text-muted);
+    color: rgba(255, 255, 255, 0.7);
     margin: 0;
 }
 
@@ -562,29 +622,31 @@ a.nav {
 }
 
 #comment-input {
-    background: var(--primary-light);
+    background: rgba(255, 255, 255, 0.15);
     border-radius: var(--radius-md);
     padding: var(--spacing-lg);
     margin-top: var(--spacing-lg);
+    backdrop-filter: blur(5px);
 }
 
 #comment-input h3 {
-    color: var(--mountain-blue);
+    color: #ffffff;
     margin-top: 0;
     font-size: 1.1rem;
 }
 
 #comment-advice {
-    background: var(--bg-light);
+    background: rgba(255, 255, 255, 0.15);
     border-radius: var(--radius-md);
     padding: var(--spacing-lg);
     text-align: center;
-    border: 2px dashed var(--border-medium);
+    border: 2px dashed rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(5px);
 }
 
 #comment-advice h4 {
     margin: 0;
-    color: var(--text-muted);
+    color: #ffffff;
     font-weight: 500;
 }
 
@@ -592,10 +654,11 @@ a.nav {
    CONTROLS & SORTING
    ============================================ */
 .controls {
-    background: var(--bg-light);
+    background: rgba(255, 255, 255, 0.15);
     padding: var(--spacing-md);
     border-radius: var(--radius-md);
     margin-bottom: var(--spacing-lg);
+    backdrop-filter: blur(5px);
 }
 
 .sort-form {
@@ -608,7 +671,7 @@ a.nav {
 
 .sort-form label {
     font-weight: 500;
-    color: var(--text-dark);
+    color: #ffffff;
     margin: 0;
 }
 
@@ -617,32 +680,39 @@ a.nav {
     min-width: 150px;
 }
 
+.sort-form button {
+    margin-top: 0;
+}
+
 /* ============================================
    HOME PAGE HERO HEADER
    ============================================ */
 main > header,
 body > header:first-of-type + header {
-    background: linear-gradient(135deg, var(--mountain-blue) 0%, var(--mountain-teal) 100%);
+    background: rgba(255, 255, 255, 0.2);
     color: #ffffff;
     text-align: center;
     padding: var(--spacing-2xl);
     border-radius: var(--radius-lg);
     margin-bottom: var(--spacing-xl);
     box-shadow: var(--shadow-lg);
+    backdrop-filter: blur(10px);
 }
 
 main > header h1,
 body > header:first-of-type + header h1 {
     margin: 0 0 var(--spacing-sm) 0;
     font-size: 2.2rem;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    color: #ffffff;
 }
 
 main > header p,
 body > header:first-of-type + header p {
     margin: 0;
     font-size: 1.1rem;
-    opacity: 0.9;
+    opacity: 0.95;
+    color: #ffffff;
 }
 
 /* ============================================
@@ -658,6 +728,16 @@ body:has(main > section:only-child) main {
    RESPONSIVE DESIGN
    ============================================ */
 @media (max-width: 768px) {
+    body > header:first-child > div {
+        flex-direction: column;
+        gap: var(--spacing-sm);
+    }
+
+    .header-logo {
+        height: 40px;
+        margin-right: 0;
+    }
+
     body > header:first-child h3 {
         flex-direction: column;
         gap: var(--spacing-xs);
@@ -723,7 +803,7 @@ body:has(main > section:only-child) main {
 }
 
 .text-muted {
-    color: var(--text-muted);
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .mt-lg {
