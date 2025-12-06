@@ -46,29 +46,10 @@
                 <span th:text="${currentUser.lastName}">Last</span>)
             </p>
             <p>
-                <a th:href="@{/logout}">🚪 Log out</a>
+                <a th:href="@{/user/logout}">🚪 Log out</a>
             </p>
         </div>
     </section>
-
-    <!-- Top 10 most commented posts -->
-<!--    <section>-->
-<!--        <h2>Top 10 most commented posts</h2>-->
-
-<!--        <div th:if="${#lists.isEmpty(topCommentedPosts)}">-->
-<!--            <p>No posts yet.</p>-->
-<!--        </div>-->
-
-<!--        <ul th:if="${!#lists.isEmpty(topCommentedPosts)}">-->
-<!--            <li th:each="post : ${topCommentedPosts}">-->
-<!--                <a th:href="@{|/posts/${post.id}|}"-->
-<!--                   th:text="${post.title}">Post title</a>-->
-<!--                <span>Comments:</span>-->
-<!--                <span th:text="${#lists.size(post.comments)}">0</span>-->
-<!--            </li>-->
-<!--        </ul>-->
-<!--    </section>-->
-
 
 
     <!-- 10 most recent posts -->
@@ -89,16 +70,11 @@
             </li>
         </ul>
     </section>
-
 </main>
-<form th:replace="~{fragments/PageLayout.html :: footer}"></form>
+
+<footer th:replace="~{fragments/PageLayout.html :: footer}"></footer>
 </body>
 </html>
-
-
-<!--<!DOCTYPE html>-->
-<!--<html xmlns:th="http://www.thymeleaf.org">-->
-<!--<form th:replace="~{fragments/PageLayout :: head('Home')}"></form>-->
 <!--<body>-->
 <!--<form th:replace="~{fragments/PageLayout :: header}"></form>-->
 

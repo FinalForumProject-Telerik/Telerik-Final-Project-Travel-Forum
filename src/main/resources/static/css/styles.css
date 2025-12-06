@@ -10,7 +10,7 @@
     --primary-light: #dbeafe;
     
     /* Mountain accent colors */
-    --mountain-blue: #1e3a5f;
+    --mountain-blue: #2A4266;
     --mountain-teal: #0d9488;
     --sky-blue: #7dd3fc;
     --sunset-orange: #fb923c;
@@ -483,6 +483,21 @@ button[type="button"]:hover {
     align-items: center;
 }
 
+.action-buttons form {
+    margin: 0;
+    padding: 0;
+    display: inline-block;
+}
+
+.action-buttons form a {
+    text-decoration: none;
+}
+
+.action-buttons button {
+    vertical-align: middle;
+    margin: 0;
+}
+
 .post-content {
     background: rgba(255, 255, 255, 0.15);
     padding: var(--spacing-lg);
@@ -545,6 +560,25 @@ button[type="button"]:hover {
 }
 
 .btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    background: var(--text-muted);
+    color: #ffffff;
+    text-decoration: none;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background: var(--text-dark);
     transform: translateY(-2px);
     box-shadow: var(--shadow-md);
 }

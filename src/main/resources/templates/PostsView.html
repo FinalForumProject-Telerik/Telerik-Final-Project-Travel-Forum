@@ -14,30 +14,26 @@
         <h1 th:text="'📝 ' + #{posts.title}">All Posts</h1>
         <p class="text-muted mb-lg">Browse travel stories and experiences shared by our community.</p>
         
+        <!-- Sorting Controls -->
         <div class="controls">
             <form method="get" action="#" class="sort-form">
-                <!-- Sort by selection -->
                 <label for="sortBy">Sort by:</label>
                 <select name="sortBy" id="sortBy">
-                    <option value="createdAt"
-                            th:selected="${sortBy == 'createdAt'}">📅 Date</option>
-                    <option value="likes"
-                            th:selected="${sortBy == 'likes'}">❤️ Likes</option>
+                    <option value="createdAt" th:selected="${sortBy == 'createdAt'}">📅 Date</option>
+                    <option value="likes" th:selected="${sortBy == 'likes'}">❤️ Likes</option>
                 </select>
 
-                <!-- Order selection -->
                 <label for="order">Order:</label>
                 <select name="order" id="order">
-                    <option value="desc"
-                            th:selected="${order == 'desc'}">⬇️ Newest first</option>
-                    <option value="asc"
-                            th:selected="${order == 'asc'}">⬆️ Oldest first</option>
+                    <option value="desc" th:selected="${order == 'desc'}">⬇️ Newest first</option>
+                    <option value="asc" th:selected="${order == 'asc'}">⬆️ Oldest first</option>
                 </select>
 
                 <button type="submit">Apply Filter</button>
             </form>
         </div>
         
+        <!-- Posts Table -->
         <div class="table">
             <div class="header">
                 <div class="header-cell" th:text="#{post.title}">Post Title</div>
@@ -49,15 +45,15 @@
                 <div class="cell">
                     <a href="#" th:href="@{/posts/{id}(id=${post.id})}" th:text="${post.title}">Post</a>
                 </div>
-                <div class="cell">❤️ <span th:text="${post.likes}">0</span></div>
-                <div class="cell" th:text="${post.user.username}">Created by</div>
-                <div class="cell"
-                     th:text="${post.createdAt == null ? '' : #temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}">
-                    Created at
+                <div class="cell">
+                    ❤️ <span th:text="${post.likes}">0</span>
                 </div>
+                <div class="cell" th:text="${post.user.username}">Created by</div>
+                <div class="cell" th:text="${post.createdAt == null ? '' : #temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}">Created at</div>
             </div>
         </div>
         
+        <!-- Pagination -->
         <div class="pagination">
             <a th:href="@{/posts(page=${page - 1}, sortBy=${sortBy}, order=${order})}"
                th:if="${page > 1}">« Previous</a>
