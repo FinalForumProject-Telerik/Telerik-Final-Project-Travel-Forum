@@ -1,41 +1,284 @@
+/* ============================================
+   TRAVEL FORUM - Modern Mountain Theme CSS
+   ============================================ */
+
+/* CSS Variables for consistent theming */
+:root {
+    /* Primary colors - cheerful travel palette */
+    --primary-color: #3b82f6;
+    --primary-hover: #2563eb;
+    --primary-light: #dbeafe;
+    
+    /* Mountain accent colors */
+    --mountain-blue: #1e3a5f;
+    --mountain-teal: #0d9488;
+    --sky-blue: #7dd3fc;
+    --sunset-orange: #fb923c;
+    --forest-green: #22c55e;
+    
+    /* Neutral colors */
+    --bg-light: #f8fafc;
+    --bg-white: #ffffff;
+    --text-dark: #1e293b;
+    --text-muted: #64748b;
+    --border-light: #e2e8f0;
+    --border-medium: #cbd5e1;
+    
+    /* Feedback colors */
+    --error-color: #ef4444;
+    --error-bg: #fef2f2;
+    --success-color: #22c55e;
+    --success-bg: #f0fdf4;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+    
+    /* Border radius */
+    --radius-sm: 6px;
+    --radius-md: 10px;
+    --radius-lg: 16px;
+    --radius-full: 9999px;
+    
+    /* Spacing */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+    --spacing-2xl: 48px;
+}
+
+/* Reset and base styles */
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    background: linear-gradient(180deg, var(--bg-light) 0%, #e0f2fe 100%);
+    background-attachment: fixed;
+    color: var(--text-dark);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+/* Mountain silhouette background decoration */
+body::before {
+    content: '';
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    background: linear-gradient(135deg, transparent 40%, rgba(30, 58, 95, 0.05) 40%, rgba(30, 58, 95, 0.05) 45%, transparent 45%),
+                linear-gradient(225deg, transparent 40%, rgba(30, 58, 95, 0.08) 40%, rgba(30, 58, 95, 0.08) 50%, transparent 50%),
+                linear-gradient(180deg, transparent 60%, rgba(30, 58, 95, 0.03) 100%);
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* ============================================
+   HEADER / NAVIGATION
+   ============================================ */
 header {
-    text-align: right;
-    padding: 10px 50px 10px 44px;
-    border-bottom: 1px solid #dee2e6;
+    background: linear-gradient(135deg, var(--mountain-blue) 0%, #2d5a87 100%);
+    padding: var(--spacing-md) var(--spacing-xl);
+    box-shadow: var(--shadow-lg);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
+header > div {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+header h3 {
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+    justify-content: center;
+    align-items: center;
+}
+
+header h3 a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--radius-full);
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    background: rgba(255, 255, 255, 0.1);
+}
+
+header h3 a:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-1px);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
 footer {
+    background: var(--mountain-blue);
+    color: rgba(255, 255, 255, 0.8);
     text-align: center;
-    padding: 10px 50px 10px 50px;
-    border-top: 1px solid #dee2e6;
+    padding: var(--spacing-lg) var(--spacing-xl);
+    margin-top: auto;
 }
 
-a {
-    color: #007bff;
+footer small {
+    font-size: 0.9rem;
+}
+
+/* ============================================
+   MAIN CONTENT AREA
+   ============================================ */
+main {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: var(--spacing-xl);
 }
 
 .body-content {
-    text-align: center;
-    padding: 10px 50px 50px 50px;
+    max-width: 900px;
+    margin: var(--spacing-xl) auto;
+    padding: var(--spacing-xl);
+    background: var(--bg-white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    text-align: left;
 }
 
+.body-content h1, .body-content h2 {
+    color: var(--mountain-blue);
+    margin-top: 0;
+}
+
+.body-content h1 {
+    font-size: 2rem;
+    border-bottom: 3px solid var(--mountain-teal);
+    padding-bottom: var(--spacing-sm);
+    margin-bottom: var(--spacing-lg);
+}
+
+.body-content h2 {
+    font-size: 1.5rem;
+    margin-bottom: var(--spacing-md);
+}
+
+/* ============================================
+   LINKS
+   ============================================ */
+a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--primary-hover);
+    text-decoration: underline;
+}
+
+/* ============================================
+   CARDS & SECTIONS
+   ============================================ */
+section {
+    background: var(--bg-white);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+    border-left: 4px solid var(--mountain-teal);
+}
+
+section h2 {
+    color: var(--mountain-blue);
+    margin-top: 0;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+section h2::before {
+    content: '🏔️';
+    font-size: 1.2rem;
+}
+
+section p {
+    margin: var(--spacing-sm) 0;
+    color: var(--text-dark);
+}
+
+section ul {
+    padding-left: var(--spacing-lg);
+    margin: var(--spacing-md) 0;
+}
+
+section li {
+    margin-bottom: var(--spacing-sm);
+    color: var(--text-dark);
+}
+
+/* About section styling */
+.about-section {
+    background: var(--bg-white);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    box-shadow: var(--shadow-md);
+    border-left: 4px solid var(--mountain-teal);
+}
+
+.about-section h2 {
+    color: var(--mountain-blue);
+    margin-top: 0;
+    font-size: 1.3rem;
+}
+
+/* ============================================
+   TABLES (Posts List)
+   ============================================ */
 .table {
     display: table;
-    margin-left: auto;
-    margin-right: auto;
-    border: 1px solid lightgrey;
+    width: 100%;
+    margin: 0 auto;
+    background: var(--bg-white);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    border-collapse: collapse;
 }
 
 .header {
     display: table-header-group;
-    font-weight: bold;
+    background: linear-gradient(135deg, var(--mountain-blue) 0%, #2d5a87 100%);
+    color: #ffffff;
+    font-weight: 600;
 }
 
 .header-cell {
     display: table-cell;
-    width: 20%;
-    padding: 12px;
-    border-bottom: 2px solid #dee2e6;
+    padding: var(--spacing-md);
+    text-align: left;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .rowGroup {
@@ -44,72 +287,448 @@ a {
 
 .row {
     display: table-row;
+    transition: background-color 0.2s ease;
+}
+
+.row:nth-child(even) {
+    background: var(--bg-light);
+}
+
+.row:hover {
+    background: var(--primary-light);
 }
 
 .cell {
     display: table-cell;
-    width: 20%;
-    padding: 12px;
-    border-bottom: 1px solid #dee2e6;
+    padding: var(--spacing-md);
+    border-bottom: 1px solid var(--border-light);
+    vertical-align: middle;
 }
 
-.margin12 {
-    margin: 12px 0px 12px 0px;
+.cell a {
+    font-weight: 500;
+    color: var(--primary-color);
+}
+
+.cell a:hover {
+    color: var(--primary-hover);
+}
+
+/* ============================================
+   FORMS
+   ============================================ */
+form {
+    max-width: 500px;
+}
+
+label {
+    display: block;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: var(--spacing-xs);
+    font-size: 0.95rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+textarea,
+select {
+    width: 100%;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 2px solid var(--border-medium);
+    border-radius: var(--radius-sm);
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    background: var(--bg-white);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+textarea:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+input[type="submit"],
+button {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+    color: #ffffff;
+    border: none;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin-top: var(--spacing-md);
+}
+
+input[type="submit"]:hover,
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+button[type="button"] {
+    background: var(--text-muted);
+}
+
+button[type="button"]:hover {
+    background: var(--text-dark);
 }
 
 .form-label {
-    font-weight: bold;
+    font-weight: 600;
+    color: var(--text-dark);
 }
 
 .form-input {
-    margin: 12px 0px 12px 0px;
-    width: 200px;
-    height: 25px;
+    margin: var(--spacing-sm) 0 var(--spacing-md) 0;
+    width: 100%;
+    max-width: 300px;
+    padding: var(--spacing-sm);
+    border: 2px solid var(--border-medium);
+    border-radius: var(--radius-sm);
 }
 
-.form-error {
-    color: #dc3545;
+.form-group {
+    margin-bottom: var(--spacing-lg);
 }
 
-.btn-primary {
-    margin: 12px 6px 12px 0px;
-    color: #fff;
-    background-color: #007bff;
-    border-color: #007bff;
-    height: 30px;
+.form-group label:first-child {
+    display: block;
+    margin-bottom: var(--spacing-xs);
 }
 
-.btn-danger {
-    margin: 12px 6px 12px 0px;
-    color: #fff;
-    background-color: #dc3545;
-    border-color: #dc3545;
-    height: 30px;
-}
-
-a.nav {
-    margin: 6px 6px 6px 6px;
-}
-
-.label-error {
-    color: red
-}
-.pagination {
-    margin-top: 20px;
+.action-buttons {
+    margin: var(--spacing-md) 0;
     display: flex;
-    gap: 10px;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
     align-items: center;
 }
 
+.post-content {
+    background: var(--bg-light);
+    padding: var(--spacing-lg);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-lg);
+    border-left: 4px solid var(--mountain-teal);
+}
+
+.form-error,
+.error,
+.label-error {
+    color: var(--error-color);
+    font-size: 0.85rem;
+    margin-top: var(--spacing-xs);
+    display: block;
+}
+
+/* ============================================
+   BUTTONS
+   ============================================ */
+.btn-primary {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+    color: #ffffff;
+    border: none;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin: var(--spacing-sm) var(--spacing-xs);
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, var(--error-color) 0%, #dc2626 100%);
+    color: #ffffff;
+    border: none;
+    padding: var(--spacing-sm) var(--spacing-lg);
+    border-radius: var(--radius-sm);
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    margin: var(--spacing-sm) var(--spacing-xs);
+}
+
+.btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+a.nav {
+    margin: var(--spacing-xs);
+}
+
+.margin12 {
+    margin: var(--spacing-md) 0;
+}
+
+/* ============================================
+   PAGINATION
+   ============================================ */
+.pagination {
+    margin-top: var(--spacing-xl);
+    display: flex;
+    gap: var(--spacing-sm);
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
 .pagination a {
-    padding: 5px 10px;
-    border: 1px solid #ccc;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 2px solid var(--border-medium);
     text-decoration: none;
-    border-radius: 4px;
+    border-radius: var(--radius-sm);
+    color: var(--text-dark);
+    font-weight: 500;
+    transition: all 0.2s ease;
+    background: var(--bg-white);
+}
+
+.pagination a:hover {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    transform: translateY(-1px);
 }
 
 .pagination a.active {
-    background-color: #007bff;
-    color: white;
-    font-weight: bold;
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
+    color: #ffffff;
+    border-color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* ============================================
+   COMMENTS SECTION
+   ============================================ */
+.comments-section {
+    margin-top: var(--spacing-xl);
+}
+
+.comments-section h3 {
+    color: var(--mountain-blue);
+    font-size: 1.3rem;
+    margin-bottom: var(--spacing-md);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+.comments-section h3::before {
+    content: '💬';
+}
+
+.comment {
+    background: var(--bg-light);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-md);
+    margin-bottom: var(--spacing-md);
+    border-left: 3px solid var(--mountain-teal);
+}
+
+.comment-content {
+    margin: 0 0 var(--spacing-sm) 0;
+    color: var(--text-dark);
+    line-height: 1.6;
+}
+
+.comment-meta {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0;
+}
+
+.comment-meta span {
+    display: inline;
+}
+
+#comment-input {
+    background: var(--primary-light);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    margin-top: var(--spacing-lg);
+}
+
+#comment-input h3 {
+    color: var(--mountain-blue);
+    margin-top: 0;
+    font-size: 1.1rem;
+}
+
+#comment-advice {
+    background: var(--bg-light);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    text-align: center;
+    border: 2px dashed var(--border-medium);
+}
+
+#comment-advice h4 {
+    margin: 0;
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+/* ============================================
+   CONTROLS & SORTING
+   ============================================ */
+.controls {
+    background: var(--bg-light);
+    padding: var(--spacing-md);
+    border-radius: var(--radius-md);
+    margin-bottom: var(--spacing-lg);
+}
+
+.sort-form {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-md);
+    align-items: center;
+    max-width: 100%;
+}
+
+.sort-form label {
+    font-weight: 500;
+    color: var(--text-dark);
+    margin: 0;
+}
+
+.sort-form select {
+    width: auto;
+    min-width: 150px;
+}
+
+/* ============================================
+   HOME PAGE HERO HEADER
+   ============================================ */
+main > header,
+body > header:first-of-type + header {
+    background: linear-gradient(135deg, var(--mountain-blue) 0%, var(--mountain-teal) 100%);
+    color: #ffffff;
+    text-align: center;
+    padding: var(--spacing-2xl);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--spacing-xl);
+    box-shadow: var(--shadow-lg);
+}
+
+main > header h1,
+body > header:first-of-type + header h1 {
+    margin: 0 0 var(--spacing-sm) 0;
+    font-size: 2.2rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+main > header p,
+body > header:first-of-type + header p {
+    margin: 0;
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+/* ============================================
+   ERROR PAGE STYLING
+   ============================================ */
+body:has(main > section:only-child) main {
+    max-width: 600px;
+    margin: var(--spacing-2xl) auto;
+    text-align: center;
+}
+
+/* ============================================
+   RESPONSIVE DESIGN
+   ============================================ */
+@media (max-width: 768px) {
+    header h3 {
+        flex-direction: column;
+        gap: var(--spacing-xs);
+    }
+    
+    header h3 a {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: 0.9rem;
+    }
+    
+    .body-content {
+        margin: var(--spacing-md);
+        padding: var(--spacing-md);
+    }
+    
+    main {
+        padding: var(--spacing-md);
+    }
+    
+    .table, .header, .row, .cell, .header-cell {
+        display: block;
+    }
+    
+    .header {
+        display: none;
+    }
+    
+    .row {
+        background: var(--bg-white);
+        margin-bottom: var(--spacing-md);
+        padding: var(--spacing-md);
+        border-radius: var(--radius-md);
+        box-shadow: var(--shadow-sm);
+        border-left: 4px solid var(--mountain-teal);
+    }
+    
+    .cell {
+        display: block;
+        padding: var(--spacing-xs) 0;
+        border: none;
+    }
+    
+    .cell:first-child {
+        font-weight: 600;
+        font-size: 1.1rem;
+    }
+    
+    .sort-form {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .sort-form select {
+        width: 100%;
+    }
+}
+
+/* ============================================
+   UTILITY CLASSES
+   ============================================ */
+.text-center {
+    text-align: center;
+}
+
+.text-muted {
+    color: var(--text-muted);
+}
+
+.mt-lg {
+    margin-top: var(--spacing-lg);
+}
+
+.mb-lg {
+    margin-bottom: var(--spacing-lg);
 }

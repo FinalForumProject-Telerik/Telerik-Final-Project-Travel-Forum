@@ -4,36 +4,35 @@
 <body>
 <form th:replace="~{fragments/PageLayout.html :: header}"></form>
 
-<header>
-    <h1>Welcome to the Travel Forum</h1>
-    <p>Share your travel stories, tips, and recommendations.</p>
-</header>
-
 <main>
+    <header>
+        <h1>✈️ Welcome to the Travel Forum</h1>
+        <p>Share your travel stories, tips, and recommendations with fellow adventurers.</p>
+    </header>
 
     <!-- Summary statistics -->
     <section>
-        <h2>Platform statistics</h2>
+        <h2>Platform Statistics</h2>
         <p>
-            <strong>Total users:</strong>
+            <strong>👥 Total users:</strong>
             <span th:text="${totalUsers}">0</span>
         </p>
         <p>
-            <strong>Total posts:</strong>
+            <strong>📝 Total posts:</strong>
             <span th:text="${totalPosts}">0</span>
         </p>
     </section>
 
     <!-- Authentication section -->
     <section>
-        <h2>Your account</h2>
+        <h2>Your Account</h2>
 
         <!-- If user is not logged in -->
         <div th:if="${currentUser == null}">
             <p>
-                <a th:href="@{/user/login}">Log in</a>
+                <a th:href="@{/user/login}">🔑 Log in</a>
                 or
-                <a th:href="@{/user/register}">Register</a>
+                <a th:href="@{/user/register}">📋 Register</a>
                 to start posting.
             </p>
         </div>
@@ -41,13 +40,13 @@
         <!-- If user is logged in -->
         <div th:if="${currentUser != null}">
             <p>
-                Logged in as:
+                👋 Logged in as:
                 <strong th:text="${currentUser.username}">username</strong>
                 (<span th:text="${currentUser.firstName}">First</span>
                 <span th:text="${currentUser.lastName}">Last</span>)
             </p>
             <p>
-                <a th:href="@{/logout}">Log out</a>
+                <a th:href="@{/logout}">🚪 Log out</a>
             </p>
         </div>
     </section>
@@ -74,19 +73,19 @@
 
     <!-- 10 most recent posts -->
     <section>
-        <h2>10 most recent posts</h2>
+        <h2>Recent Posts</h2>
 
         <div th:if="${#lists.isEmpty(recentPosts)}">
-            <p>No recent posts.</p>
+            <p>No recent posts yet. Be the first to share your travel experience!</p>
         </div>
 
         <ul th:if="${!#lists.isEmpty(recentPosts)}">
             <li th:each="post : ${recentPosts}">
                 <a th:href="@{|/posts/${post.id}|}"
                    th:text="${post.title}">Post title</a>
-                -
-                <span>Created at:</span>
-                <span th:text="${post.createdAt}">2025-01-01T12:00</span>
+                <span class="text-muted"> — </span>
+                <span class="text-muted">🕐 </span>
+                <span class="text-muted" th:text="${post.createdAt}">2025-01-01T12:00</span>
             </li>
         </ul>
     </section>
@@ -95,10 +94,6 @@
 <form th:replace="~{fragments/PageLayout.html :: footer}"></form>
 </body>
 </html>
-
-
-
-
 
 
 <!--<!DOCTYPE html>-->

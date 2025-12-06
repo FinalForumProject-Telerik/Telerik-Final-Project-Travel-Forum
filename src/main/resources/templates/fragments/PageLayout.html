@@ -2,30 +2,31 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:fragment="head(title)">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="'Travel Forum | ' + ${title}">Title</title>
     <link href="../../static/css/styles.css" th:href="@{/css/styles.css}" rel="stylesheet"/>
 </head>
 <header th:fragment="header">
     <div>
         <h3>
-            <a href="#" th:href="@{/}" th:text="#{navigation.home} + ' | '">Home</a>
-            <a href="#" th:href="@{/posts}" th:text="#{navigation.posts} + ' | '">Posts</a>
-            <a href="#" th:href="@{/posts/new}" th:text="#{navigation.create-post} + ' | '">Create a post | </a>
-            <a href="#" th:href="@{/about}" th:text="#{navigation.about}">About</a>
+            <a href="#" th:href="@{/}" th:text="'🏠 ' + #{navigation.home}">Home</a>
+            <a href="#" th:href="@{/posts}" th:text="'📝 ' + #{navigation.posts}">Posts</a>
+            <a href="#" th:href="@{/posts/new}" th:text="'✏️ ' + #{navigation.create-post}">Create a post</a>
+            <a href="#" th:href="@{/about}" th:text="'ℹ️ ' + #{navigation.about}">About</a>
             <a th:if="${session.currentUser}"
                th:href="@{/user/logout}"
-               th:text="#{navigation.logout}">Logout</a>
+               th:text="'🚪 ' + #{navigation.logout}">Logout</a>
             <a th:unless="${session.currentUser}"
                th:href="@{/user/login}"
-               th:text="#{navigation.login}">login</a>
+               th:text="'🔑 ' + #{navigation.login}">Login</a>
             <a th:unless="${session.currentUser}"
                th:href="@{/user/register}"
-               th:text="#{navigation.register}">Register</a>
+               th:text="'📋 ' + #{navigation.register}">Register</a>
         </h3>
     </div>
 </header>
 
 <footer th:fragment="footer">
-    <small th:text="${'© Copyright ' + #dates.year(#dates.createNow()) + ' Travel Forum'}">Travel Forum</small>
+    <small th:text="${'🏔️ © Copyright ' + #dates.year(#dates.createNow()) + ' Travel Forum — Explore the World Together'}">Travel Forum</small>
 </footer>
 </html>

@@ -6,22 +6,26 @@
 <form th:replace="~{fragments/PageLayout.html :: header}"></form>
 
 <div class="body-content">
-    <h2>Login</h2>
+    <h1>🔑 Login</h1>
+    <p class="text-muted">Welcome back! Please enter your credentials to continue.</p>
+    
     <form th:action="@{/user/login}" th:object="${user}" method="post">
-        <label>Email</label>
-        <br/>
-        <input type="text" th:field="*{email}"/>
-        <label class="error" th:errors="*{email}">Email error</label>
-        <br/><br/>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input id="email" type="text" th:field="*{email}" placeholder="Enter your email"/>
+            <label class="error" th:errors="*{email}">Email error</label>
+        </div>
 
-        <label>Password</label>
-        <br/>
-        <input type="password" th:field="*{password}"/>
-        <label class="error" th:errors="*{password}">Password error</label>
-        <br/><br/>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input id="password" type="password" th:field="*{password}" placeholder="Enter your password"/>
+            <label class="error" th:errors="*{password}">Password error</label>
+        </div>
 
         <input type="submit" value="Login"/>
     </form>
+    
+    <p class="mt-lg">Don't have an account? <a th:href="@{/user/register}">Register here</a></p>
 </div>
 
 <form th:replace="~{fragments/PageLayout.html :: footer}"></form>

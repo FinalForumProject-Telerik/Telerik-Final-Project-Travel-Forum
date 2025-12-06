@@ -1,49 +1,54 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-<form th:replace="~{fragments/PageLayout.html :: head('Login')}"></form>
+<form th:replace="~{fragments/PageLayout.html :: head('Register')}"></form>
 <body>
 <form th:replace="~{fragments/PageLayout.html :: header}"></form>
 
 <div class="body-content">
-    <h2>Login</h2>
+    <h1>📋 Create Your Account</h1>
+    <p class="text-muted">Join our community of travel enthusiasts!</p>
+    
     <form action="#" th:action="@{/user/register}" th:object="${register}" method="post">
-        <label th:text="#{user.label.email}">Email</label>
-        <br/>
-        <input type="text" th:field="*{email}"/>
-        <label class="error" th:errors="*{email}">Email error placeholder</label>
-        <br/><br/>
+        <div class="form-group">
+            <label th:text="#{user.label.email}">Email</label>
+            <input type="text" th:field="*{email}" placeholder="Enter your email"/>
+            <label class="error" th:errors="*{email}">Email error placeholder</label>
+        </div>
 
-        <label th:text="#{user.label.username}">Username</label>
-        <br/>
-        <input type="text" th:field="*{username}"/>
-        <label class="error" th:errors="*{username}">Username error placeholder</label>
-        <br/><br/>
+        <div class="form-group">
+            <label th:text="#{user.label.username}">Username</label>
+            <input type="text" th:field="*{username}" placeholder="Choose a username"/>
+            <label class="error" th:errors="*{username}">Username error placeholder</label>
+        </div>
 
-        <label th:text="#{user.label.first-name}">First Name</label>
-        <br/>
-        <input type="text" th:field="*{firstName}"/>
-        <label class="error" th:errors="*{firstName}">First Name error placeholder</label>
-        <br/><br/>
+        <div class="form-group">
+            <label th:text="#{user.label.first-name}">First Name</label>
+            <input type="text" th:field="*{firstName}" placeholder="Enter your first name"/>
+            <label class="error" th:errors="*{firstName}">First Name error placeholder</label>
+        </div>
 
-        <label th:text="#{user.label.last-name}">Last Name</label>
-        <br/>
-        <input type="text" th:field="*{lastName}"/>
-        <label class="error" th:errors="*{lastName}">Username error placeholder</label>
-        <br/><br/>
+        <div class="form-group">
+            <label th:text="#{user.label.last-name}">Last Name</label>
+            <input type="text" th:field="*{lastName}" placeholder="Enter your last name"/>
+            <label class="error" th:errors="*{lastName}">Username error placeholder</label>
+        </div>
 
-        <label th:text="#{user.label.password}">Password</label>
-        <br/>
-        <input type="password" th:field="*{password}"/>
-        <label class="error" th:errors="*{password}">Password error placeholder</label>
-        <br/><br/>
-        <label th:text="#{user.label.password.confirm}">Password confirm</label>
-        <br/>
-        <input type="password" th:field="*{passwordConfirm}"/>
-        <label class="label-error" th:errors="*{passwordConfirm}">Error placeholder </label>
-        <br><br>
+        <div class="form-group">
+            <label th:text="#{user.label.password}">Password</label>
+            <input type="password" th:field="*{password}" placeholder="Create a password"/>
+            <label class="error" th:errors="*{password}">Password error placeholder</label>
+        </div>
 
-        <input type="submit" value="Login"/>
+        <div class="form-group">
+            <label th:text="#{user.label.password.confirm}">Confirm Password</label>
+            <input type="password" th:field="*{passwordConfirm}" placeholder="Confirm your password"/>
+            <label class="label-error" th:errors="*{passwordConfirm}">Error placeholder</label>
+        </div>
+
+        <input type="submit" value="Register"/>
     </form>
+    
+    <p class="mt-lg">Already have an account? <a th:href="@{/user/login}">Login here</a></p>
 </div>
 
 <form th:replace="~{fragments/PageLayout.html :: footer}"></form>

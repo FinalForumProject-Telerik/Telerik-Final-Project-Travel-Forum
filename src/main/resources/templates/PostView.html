@@ -5,42 +5,48 @@
 <header th:replace="~{fragments/PageLayout.html :: header}"></header>
 
 <div class="body-content">
-    <h2 th:text="${post.title}">Post Title</h2>
-    <div th:style="text-align">
-        <p class="margin12" th:text="#{post.content} + ': ' +      ${post.content}">Content</p>
-        <p class="margin12" th:text="#{post.created-by}  + ': ' + ${post.user.username}">Username</p>
-        <p class="margin12" th:text="#{post.likes} + ': ' + ${post.likes}">Likes</p>
-    </div>
+    <h1 th:text="${post.title}">Post Title</h1>
+    
+    <section class="post-content">
+        <p class="margin12" th:text="${post.content}">Content</p>
+        <p class="text-muted margin12">
+            <strong>👤 </strong> <span th:text="#{post.created-by}">Created by</span>: <span th:text="${post.user.username}">Username</span>
+        </p>
+        <p class="margin12">
+            <strong>❤️ </strong> <span th:text="#{post.likes}">Likes</span>: <span th:text="${post.likes}">0</span>
+        </p>
+    </section>
 
     <!-- Like Post button - only visible to logged in users-->
-    <div th:if="${currentUser != null}">
+    <div th:if="${currentUser != null}" class="action-buttons">
         <form th:action="@{/posts/{id}/like(id=${post.id})}" method="post" style="display: inline;">
-            <button type="submit">Like Post</button>
+            <button type="submit">❤️ Like Post</button>
         </form>
-        <span th:if="${likeError != null}" style="color: red; margin-left: 10px;" th:text="${likeError}">Error message</span>
+        <span th:if="${likeError != null}" class="error" th:text="${likeError}">Error message</span>
     </div>
 
     <!-- Edit Post button - only visible to post creator-->
-    <div th:if="${currentUser != null and (currentUser.id == post.user.id)}">
+    <div th:if="${currentUser != null and (currentUser.id == post.user.id)}" class="action-buttons">
         <a th:href="@{/posts/{id}/edit(id=${post.id})}">
-            <button type="button">Edit Post</button>
+            <button type="button">✏️ Edit Post</button>
         </a>
     </div>
+    
     <!-- Delete Post button - only visible to post creator-->
-    <div th:if="${currentUser != null and (currentUser.id == post.user.id)}">
+    <div th:if="${currentUser != null and (currentUser.id == post.user.id)}" class="action-buttons">
         <form th:action="@{/posts/{id}/delete(id=${post.id})}" method="post" onsubmit="return confirm('Are you sure you want to delete this post? This action cannot be undone.');">
-            <button type="submit">Delete Post</button>
+            <button type="submit" class="btn-danger">🗑️ Delete Post</button>
         </form>
     </div>
+    
     <div id="comment-advice" th:if="${session.currentUser == null}">
         <h4 th:text="#{comments.login-to-comment}">Please log in to add a comment.</h4>
     </div>
 
     <div id="comment-input" th:if="${session.currentUser != null}">
-        <h3 th:text="#{comments.title}">Add a comment</h3>
+        <h3>💬 Add a Comment</h3>
         <form th:action="@{/posts/{id}/comment(id=${post.id})}" th:object="${comment}" method="post">
-            <br>
-                <textarea th:field="*{content}" placeholder="Enter your comment here" rows="3"></textarea>
+            <textarea th:field="*{content}" placeholder="Share your thoughts..." rows="3"></textarea>
             <br>
             <input type="submit" th:value="#{comments.submit}"/>
             <label class="label-error" th:if="${#fields.hasErrors('content')}" th:errors="*{content}">Error placeholder</label>
@@ -57,13 +63,12 @@
 <!--    </h3>-->
 
     <!-- Comments Section -->
-    <hr>
     <div class="comments-section">
         <h3 th:text="#{comments.title}">Comments</h3>
 
         <!-- Show message if no comments -->
         <div th:if="${post.comments.isEmpty()}">
-            <p th:text="#{comments.empty}">No comments yet</p>
+            <p class="text-muted" th:text="#{comments.empty}">No comments yet</p>
         </div>
 
         <!-- Loop through all comments -->
@@ -71,11 +76,12 @@
             <div class="comment" th:each="comment : ${post.comments}">
                 <p class="comment-content" th:text="${comment.content}">Comment content here</p>
                 <p class="comment-meta">
+                    <span>👤 </span>
                     <span th:text="#{comment.user} + ' ' + ${comment.user.username}">By username</span>
                     <span> | </span>
+                    <span>🕐 </span>
                     <span th:text="#{comment.created-at} + ' ' + ${#temporals.format(comment.createdAt, 'yyyy-MM-dd HH:mm')}">Posted on date</span>
                 </p>
-                <hr>
             </div>
         </div>
     </div>

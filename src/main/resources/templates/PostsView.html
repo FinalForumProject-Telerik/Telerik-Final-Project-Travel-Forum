@@ -6,46 +6,50 @@
 
 <div class="body-content">
     <div th:if="${posts.isEmpty()}">
-        <h2 th:text="#{posts.title.empty}">No Posts</h2>
+        <h1>📝 Posts</h1>
+        <p class="text-muted" th:text="#{posts.title.empty}">No Posts</p>
+        <p>Be the first to share your travel experience! <a th:href="@{/posts/new}">Create a post</a></p>
     </div>
     <div th:unless="${posts.isEmpty()}">
-        <h2 th:text="#{posts.title}">All Posts</h2>
-        <div class="controls" style="margin-bottom: 20px;">
+        <h1 th:text="'📝 ' + #{posts.title}">All Posts</h1>
+        <p class="text-muted mb-lg">Browse travel stories and experiences shared by our community.</p>
+        
+        <div class="controls">
             <form method="get" action="#" class="sort-form">
-
                 <!-- Sort by selection -->
                 <label for="sortBy">Sort by:</label>
                 <select name="sortBy" id="sortBy">
                     <option value="createdAt"
-                            th:selected="${sortBy == 'createdAt'}">Date</option>
+                            th:selected="${sortBy == 'createdAt'}">📅 Date</option>
                     <option value="likes"
-                            th:selected="${sortBy == 'likes'}">Likes</option>
+                            th:selected="${sortBy == 'likes'}">❤️ Likes</option>
                 </select>
 
                 <!-- Order selection -->
                 <label for="order">Order:</label>
                 <select name="order" id="order">
                     <option value="desc"
-                            th:selected="${order == 'desc'}">Newest first</option>
+                            th:selected="${order == 'desc'}">⬇️ Newest first</option>
                     <option value="asc"
-                            th:selected="${order == 'asc'}">Oldest first</option>
+                            th:selected="${order == 'asc'}">⬆️ Oldest first</option>
                 </select>
 
-                <button type="submit">Apply</button>
+                <button type="submit">Apply Filter</button>
             </form>
         </div>
+        
         <div class="table">
             <div class="header">
                 <div class="header-cell" th:text="#{post.title}">Post Title</div>
                 <div class="header-cell" th:text="#{post.likes}">Likes</div>
                 <div class="header-cell" th:text="#{post.created-by}">Created by</div>
-                <div class="header-cell" th:text="#{post.createdAt}">Created by</div>
+                <div class="header-cell" th:text="#{post.createdAt}">Created at</div>
             </div>
             <div class="row" th:each="post : ${posts}">
                 <div class="cell">
                     <a href="#" th:href="@{/posts/{id}(id=${post.id})}" th:text="${post.title}">Post</a>
                 </div>
-                <div class="cell" th:text="${post.likes}">0</div>
+                <div class="cell">❤️ <span th:text="${post.likes}">0</span></div>
                 <div class="cell" th:text="${post.user.username}">Created by</div>
                 <div class="cell"
                      th:text="${post.createdAt == null ? '' : #temporals.format(post.createdAt, 'yyyy-MM-dd HH:mm')}">
@@ -53,19 +57,20 @@
                 </div>
             </div>
         </div>
+        
         <div class="pagination">
             <a th:href="@{/posts(page=${page - 1}, sortBy=${sortBy}, order=${order})}"
-               th:if="${page > 1}">Previous</a>
+               th:if="${page > 1}">« Previous</a>
 
             <span th:each="i : ${#numbers.sequence(1, totalPages)}">
-        <a th:href="@{/posts(page=${i}, sortBy=${sortBy}, order=${order})}"
-           th:text="${i}"
-           th:classappend="${i == page} ? 'active' : ''">
-        </a>
-    </span>
+                <a th:href="@{/posts(page=${i}, sortBy=${sortBy}, order=${order})}"
+                   th:text="${i}"
+                   th:classappend="${i == page} ? 'active' : ''">
+                </a>
+            </span>
 
             <a th:href="@{/posts(page=${page + 1}, sortBy=${sortBy}, order=${order})}"
-               th:if="${page < totalPages}">Next</a>
+               th:if="${page < totalPages}">Next »</a>
         </div>
     </div>
 </div>
