@@ -7,7 +7,7 @@
 
 <main>
 
-    <section th:if="${currentUser != null and currentUser.admin}">
+    <section th:if="${currentUser != null and currentUser.isAdmin()}">
         <h2>Admin: Search and manage users</h2>
 
         <form th:action="@{/admin/users}" method="get">
@@ -45,23 +45,23 @@
                 <td th:text="${u.email}">email</td>
                 <td th:text="${u.firstName}">First</td>
                 <td th:text="${u.lastName}">Last</td>
-                <td th:text="${u.blocked}">false</td>
-                <td th:text="${u.admin}">false</td>
+                <td th:text="${u.isBlocked()}">false</td>
+                <td th:text="${u.isAdmin()}">false</td>
                 <td>
-                    <form th:action="@{/admin/users/{id}/block(id=${u.id})}" method="post" th:if="${!u.blocked}" style="display:inline">
+                    <form th:action="@{/admin/users/{id}/block(id=${u.id})}" method="post" th:if="${!u.isBlocked()}" style="display:inline">
                         <input type="hidden" name="username" th:value="${username}" />
                         <input type="hidden" name="email" th:value="${email}" />
                         <input type="hidden" name="firstName" th:value="${firstName}" />
                         <button type="submit">Block</button>
                     </form>
-                    <form th:action="@{/admin/users/{id}/unblock(id=${u.id})}" method="post" th:if="${u.blocked}" style="display:inline">
+                    <form th:action="@{/admin/users/{id}/unblock(id=${u.id})}" method="post" th:if="${u.isBlocked()}" style="display:inline">
                         <input type="hidden" name="username" th:value="${username}" />
                         <input type="hidden" name="email" th:value="${email}" />
                         <input type="hidden" name="firstName" th:value="${firstName}" />
                         <button type="submit">Unblock</button>
                     </form>
 
-                    <form th:action="@{/admin/users/{id}/promote(id=${u.id})}" method="post" th:if="${!u.admin}" style="display:inline; margin-left:6px">
+                    <form th:action="@{/admin/users/{id}/promote(id=${u.id})}" method="post" th:if="${!u.isAdmin()}" style="display:inline; margin-left:6px">
                         <input type="hidden" name="username" th:value="${username}" />
                         <input type="hidden" name="email" th:value="${email}" />
                         <input type="hidden" name="firstName" th:value="${firstName}" />
@@ -94,7 +94,7 @@
 
     </section>
 
-    <section th:unless="${currentUser != null and currentUser.admin}">
+    <section th:unless="${currentUser != null and currentUser.isAdmin()}">
         <p>Only administrators can access this page.</p>
     </section>
 

@@ -25,7 +25,7 @@
                th:href="@{/user/register}"
                th:text="#{navigation.register}">Register</a>
 
-            <a th:if="${session.currentUser != null and session.currentUser.admin}"
+            <a th:if="${session.currentUser != null and session.currentUser.isAdmin()}"
                th:href="@{/admin/users}"
                th:text="#{navigation.admin}">Admin Panel
 

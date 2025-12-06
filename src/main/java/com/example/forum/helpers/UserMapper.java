@@ -32,10 +32,13 @@ public class UserMapper {
     public UserDto toDto(User user) {
         if (user == null) return null;
         UserDto userDto = new UserDto();
+        userDto.setId(user.getId());
         userDto.setUsername(user.getUsername());
         userDto.setFirstName(user.getFirstName());
         userDto.setLastName(user.getLastName());
         userDto.setEmail(user.getEmail());
+        userDto.setBlocked(user.isBlocked());
+        userDto.setAdmin(user.isAdmin());
         return userDto;
     }
 }
