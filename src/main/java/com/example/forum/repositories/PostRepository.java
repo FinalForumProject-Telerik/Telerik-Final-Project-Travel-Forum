@@ -22,7 +22,9 @@ public interface PostRepository {
 
     List<Post> getTopCommentedPosts(int limit);
     List<Post> getAllPostsPaged(String sortBy, String order, int page, int pageSize);
+    List<Post> getUserPostsPaged(int userId, String sortBy, String order, int page, int pageSize);
     long countPosts();
+    long countUserPosts(int userId);
     boolean checkIfPostIsLikedByUser(int postId, int userId);
     void addLikeToPost(int postId, int userId);
 

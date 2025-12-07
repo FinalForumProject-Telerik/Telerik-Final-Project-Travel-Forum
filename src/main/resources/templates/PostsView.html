@@ -29,6 +29,12 @@
                     <option value="asc" th:selected="${order == 'asc'}">⬆️ Oldest first</option>
                 </select>
 
+                <label for="ownPosts" th:if="${currentUser != null}">Filter:</label>
+                <select name="ownPosts" id="ownPosts" th:if="${currentUser != null}">
+                    <option value="false" th:selected="${!ownPosts}">🌍 All Posts</option>
+                    <option value="true" th:selected="${ownPosts}">👤 My Posts</option>
+                </select>
+
                 <button type="submit">Apply Filter</button>
             </form>
         </div>
@@ -55,17 +61,17 @@
         
         <!-- Pagination -->
         <div class="pagination">
-            <a th:href="@{/posts(page=${page - 1}, sortBy=${sortBy}, order=${order})}"
+            <a th:href="@{/posts(page=${page - 1}, sortBy=${sortBy}, order=${order}, ownPosts=${ownPosts})}"
                th:if="${page > 1}">« Previous</a>
 
             <span th:each="i : ${#numbers.sequence(1, totalPages)}">
-                <a th:href="@{/posts(page=${i}, sortBy=${sortBy}, order=${order})}"
+                <a th:href="@{/posts(page=${i}, sortBy=${sortBy}, order=${order}, ownPosts=${ownPosts})}"
                    th:text="${i}"
                    th:classappend="${i == page} ? 'active' : ''">
                 </a>
             </span>
 
-            <a th:href="@{/posts(page=${page + 1}, sortBy=${sortBy}, order=${order})}"
+            <a th:href="@{/posts(page=${page + 1}, sortBy=${sortBy}, order=${order}, ownPosts=${ownPosts})}"
                th:if="${page < totalPages}">Next »</a>
         </div>
     </div>

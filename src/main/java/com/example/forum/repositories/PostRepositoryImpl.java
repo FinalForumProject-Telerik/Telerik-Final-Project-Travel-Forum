@@ -1,7 +1,6 @@
 package com.example.forum.repositories;
 
 import com.example.forum.exceptions.EntityNotFoundException;
-import com.example.forum.exceptions.EntityNotFoundException;
 import com.example.forum.models.Post;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -59,9 +58,33 @@ public class PostRepositoryImpl implements PostRepository {
             return query.list();
         }
     }
+
+    @Override
+    public List<Post> getUserPostsPaged(int userId, String sortBy, String order, int page, int pageSize) {
+        try (Session session = sessionFactory.openSession()) {
+            String hql = "FROM Post p WHERE p.user.id = :userId ORDER BY p." + sortBy + " " + order;
+
+            Query<Post> query = session.createQuery(hql, Post.class);
+            query.setParameter("userId", userId);
+            query.setFirstResult((page - 1) * pageSize);
+            query.setMaxResults(pageSize);
+
+            return query.list();
+        }
+    }
+
     public long countPosts() {
         try (Session session = sessionFactory.openSession()) {
             return session.createQuery("SELECT COUNT(p) FROM Post p", Long.class).getSingleResult();
+        }
+    }
+
+    @Override
+    public long countUserPosts(int userId) {
+        try (Session session = sessionFactory.openSession()) {
+            return session.createQuery("SELECT COUNT(p) FROM Post p WHERE p.user.id = :userId", Long.class)
+                    .setParameter("userId", userId)
+                    .getSingleResult();
         }
     }
 

@@ -21,6 +21,8 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("/posts")
 public class PostMvcController {
@@ -44,19 +46,42 @@ public class PostMvcController {
             @RequestParam(defaultValue = "createdAt") String sortBy,
             @RequestParam(defaultValue = "desc") String order,
             @RequestParam(defaultValue = "1") int page,
+            @RequestParam(defaultValue = "false") boolean ownPosts,
+            HttpSession session,
             Model model) {
 
         int pageSize = 10;
-        long totalPosts = postService.getTotalPosts();
-        int totalPages = (int) Math.ceil((double) totalPosts / pageSize);
+        User currentUser = null;
 
-        model.addAttribute("posts",
-                postService.getAllPostsPaged(sortBy, order, page, pageSize));
+        // Try to get current user if logged in
+        try {
+            currentUser = authenticationHelper.tryGetCurrentUser(session);
+            model.addAttribute("currentUser", currentUser);
+        } catch (AuthorizationException e) {
+            // User not logged in
+        }
 
+        List<Post> posts;
+        long totalPosts;
+        int totalPages;
+
+        // If ownPosts is true and user is logged in, filter by user's posts
+        if (ownPosts && currentUser != null) {
+            totalPosts = postService.getTotalUserPosts(currentUser.getId());
+            totalPages = (int) Math.ceil((double) totalPosts / pageSize);
+            posts = postService.getUserPostsPaged(currentUser.getId(), sortBy, order, page, pageSize);
+        } else {
+            totalPosts = postService.getTotalPosts();
+            totalPages = (int) Math.ceil((double) totalPosts / pageSize);
+            posts = postService.getAllPostsPaged(sortBy, order, page, pageSize);
+        }
+
+        model.addAttribute("posts", posts);
         model.addAttribute("sortBy", sortBy);
         model.addAttribute("order", order);
         model.addAttribute("page", page);
         model.addAttribute("totalPages", totalPages);
+        model.addAttribute("ownPosts", ownPosts);
 
         return "PostsView";
     }

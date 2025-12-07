@@ -5,7 +5,6 @@ import com.example.forum.models.Post;
 import com.example.forum.models.User;
 import com.example.forum.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -90,8 +89,18 @@ public class PostServiceImpl implements PostService {
         return postRepository.getAllPostsPaged(sortBy, order, page, pageSize);
     }
 
+    @Override
+    public List<Post> getUserPostsPaged(int userId, String sortBy, String order, int page, int pageSize) {
+        return postRepository.getUserPostsPaged(userId, sortBy, order, page, pageSize);
+    }
+
     public long getTotalPosts() {
         return postRepository.countPosts();
+    }
+
+    @Override
+    public long getTotalUserPosts(int userId) {
+        return postRepository.countUserPosts(userId);
     }
 
 }

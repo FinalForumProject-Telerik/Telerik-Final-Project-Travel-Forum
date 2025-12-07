@@ -78,5 +78,6 @@ public class CommentServiceImpl implements CommentService {
             throw new AuthorizationException("Not authorized");
         }
         commentRepository.deleteById(commentId);
+
     }
 }
