@@ -228,7 +228,7 @@ public class PostMvcController {
         } catch (EntityNotFoundException | AuthorizationException e) {
             model.addAttribute("statusCode", HttpStatus.NOT_FOUND.getReasonPhrase());
             model.addAttribute("error", e.getMessage());
-            return "ErrorView";
+            return "Error";
         }
     }
     @PostMapping("/{id}/like")

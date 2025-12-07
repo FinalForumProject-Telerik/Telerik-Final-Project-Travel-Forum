@@ -132,6 +132,18 @@ public class AdminMvcController {
         return redirectWithParams(username, email, firstName);
     }
 
+    @PostMapping("/comments/delete")
+    public String deleteCommentByParam(@RequestParam(name = "commentId") int commentId,
+                                       @RequestParam(required = false) String username,
+                                       @RequestParam(required = false) String email,
+                                       @RequestParam(required = false, name = "firstName") String firstName,
+                                       HttpSession session) {
+        User requester = authenticationHelper.tryGetCurrentUser(session);
+        authenticationHelper.requireAdmin(requester);
+        commentService.deleteComment(commentId, requester);
+        return redirectWithParams(username, email, firstName);
+    }
+
     private String redirectWithParams(String username, String email, String firstName) {
         StringBuilder sb = new StringBuilder("redirect:/admin/users");
         String sep = "?";
