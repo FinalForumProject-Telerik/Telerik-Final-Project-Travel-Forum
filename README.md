@@ -99,7 +99,7 @@ database.password=your_password
 3. Access the application at: `http://localhost:8080`
 
 ## API Reference
-
+Api authentication is done through the Authorization header with value User email and password. EG: example@example.com password1
 ### Posts API
 
 | Method | Endpoint | Description |
