@@ -9,6 +9,7 @@ public class CommentMapper {
 
     public CommentDto toDto(Comment comment) {
         CommentDto dto = new CommentDto();
+
         dto.setUserId(comment.getUser() != null ? comment.getUser().getId() : null);
         dto.setPostId(comment.getPost() != null ? comment.getPost().getId() : null);
         dto.setContent(comment.getContent());

@@ -69,13 +69,6 @@
                         <input type="hidden" name="firstName" th:value="${firstName}" />
                         <button type="submit">Unblock</button>
                     </form>
-
-                    <form th:action="@{/admin/users/{id}/promote(id=${u.id})}" method="post" th:if="${!u.isAdmin()}" style="display:inline; margin-left:6px">
-                        <input type="hidden" name="username" th:value="${username}" />
-                        <input type="hidden" name="email" th:value="${email}" />
-                        <input type="hidden" name="firstName" th:value="${firstName}" />
-                        <button type="submit">Promote to Admin</button>
-                    </form>
                 </td>
             </tr>
             </tbody>
@@ -83,22 +76,28 @@
         </div>
         <hr/>
         <h3>Delete post or comment by id</h3>
-        <form th:action="@{/posts/{id}/delete(id=${0})}" method="post" onsubmit="return true;">
+        <form th:action="@{/admin/posts/{id}/delete(id=${0})}" method="post">
             <label>Post id:</label>
             <input type="number" name="postId" id="postId" />
             <input type="hidden" name="username" th:value="${username}" />
             <input type="hidden" name="email" th:value="${email}" />
             <input type="hidden" name="firstName" th:value="${firstName}" />
-            <button type="submit" formaction="#" th:onclick="|this.form.action='/admin/posts/' + document.getElementById('postId').value + '/delete'|">Delete Post</button>
+            <button type="button"
+                    onclick="(function(btn){ const id = document.getElementById('postId').value; if(!id){ alert('Please enter a post id'); return; } btn.form.action = '/admin/posts/' + encodeURIComponent(id) + '/delete'; btn.form.submit(); })(this);">
+                Delete Post
+            </button>
         </form>
 
-        <form th:action="@{/admin/comments/{id}/delete(id=${0})}" method="post" onsubmit="return true;">
+        <form th:action="@{/admin/comments/{id}/delete(id=${0})}" method="post">
             <label>Comment id:</label>
             <input type="number" name="commentId" id="commentId" />
             <input type="hidden" name="username" th:value="${username}" />
             <input type="hidden" name="email" th:value="${email}" />
             <input type="hidden" name="firstName" th:value="${firstName}" />
-            <button type="submit" formaction="#" th:onclick="|this.form.action='/admin/comments/' + document.getElementById('commentId').value + '/delete'|">Delete Comment</button>
+            <button type="button"
+                    onclick="(function(btn){ const id = document.getElementById('commentId').value; if(!id){ alert('Please enter a comment id'); return; } btn.form.action = '/admin/comments/' + encodeURIComponent(id) + '/delete'; btn.form.submit(); })(this);">
+                Delete Comment
+            </button>
         </form>
 
     </section>
